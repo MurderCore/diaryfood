@@ -16,51 +16,64 @@ class FoodManager {
     
     // MARK: - Fetch all data
     func fetchFood(type: String) -> [NSManagedObject] {
+        var res: [NSManagedObject] = []
+        
         let request = NSFetchRequest<NSManagedObject>(entityName: type)
         do {
-            return (try context?.fetch(request))!
+            try res = (context?.fetch(request))!
         } catch {
             print("Error fetching data: \(type)")
         }
+        return res
     }
 
     
     // MARK: - Fetch only one object
-    func fetchMeal(id: Int) -> NSManagedObject {
-        return fetchFood(type: "Meals")[id]
+    func fetchFood(byIndex id: Int, type: String) -> NSManagedObject {
+        return fetchFood(type: type)[id]
     }
-    func fetchDrink(id: Int) -> NSManagedObject {
-        return fetchFood(type: "Drinks")[id]
+
+    func fetchFood(byId id: Int, type: String) -> NSManagedObject {
+        var obj = NSManagedObject()
+        for food in fetchFood(type: type){
+            if food.value(forKey: "id") as! Int16 == id {
+                obj = food
+                break
+            }
+        }
+        return obj
     }
     
     
-    func fetchCount(type: String) -> Int {
-        return fetchFood(type: type).count
+    func fetchCount(type: String) -> Int16 {
+        return Int16(fetchFood(type: type).count)
     }
     
     
     // MARK: - Add an object to DB
-    func addFood(_ food: Food, type: String){
+    func addFood(id: Int16, name: String, ingredients: String, image: NSData , type: String){
         
         let entity = NSEntityDescription.entity(forEntityName: "\(type)", in: context!)
         let storedItem = NSManagedObject(entity: entity!, insertInto: context)
-        storedItem.setValues(meal: food)
+        
+        storedItem.setValue(id, forKey: "id")
+        storedItem.setValue(name, forKey: "name")
+        storedItem.setValue(ingredients, forKey: "ingredients")
+        print("values setted")
+        storedItem.setValue(image, forKey: "image")
+        print("image setted")
         
         do {
             try context?.save()
+            print("\(name) saved succesfully")
         } catch {
-            print("Error saving data to DB")
+            print("Error saving \(name) to DB")
         }
     }
-}
-
-
-extension NSManagedObject {
-    func setValues(meal: Food){
-        self.setValue(meal.id, forKey: "id")
-        self.setValue(meal.name, forKey: "name")
-        self.setValue(meal.ingredients, forKey: "ingredients")
-        self.setValue(meal.image, forKey: "image")
+    
+    func removeFood(byId id: Int, type: String){
+        let food = fetchFood(byId: id, type: type)
+        context?.delete(food)
     }
 }
 

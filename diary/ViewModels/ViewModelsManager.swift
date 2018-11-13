@@ -10,9 +10,17 @@ import Foundation
 
 class ViewModels {
     
-    var db: FoodManager()
+    var db = FoodManager()
     
     var root = RootViewModel()
-    var meals = MealsViewModel(foodManager: db)
+    var meals: MealsViewModel?
+    var drinks: DrinksViewModel?
+    var createMeal: CreateMealViewModel?
+    
+    init() {
+        meals = MealsViewModel(foodManager: db)
+        drinks = DrinksViewModel(foodManager: db)
+        createMeal = CreateMealViewModel(db: db)
+    }
 }
 

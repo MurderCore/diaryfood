@@ -37,7 +37,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Npw-YN-745" kind="relationship" relationship="viewControllers" id="CAd-MZ-QxR"/>
+                        <segue destination="Npw-YN-745" kind="relationship" relationship="viewControllers" id="MuQ-aa-K1H"/>
                         <segue destination="zLP-TG-TMf" kind="relationship" relationship="viewControllers" id="Y6y-CI-Df6"/>
                         <segue destination="3Mo-OF-UPf" kind="relationship" relationship="viewControllers" id="Fb6-9C-VZf"/>
                         <segue destination="lGr-Zf-7iK" kind="relationship" relationship="viewControllers" id="tvP-8L-Xdq"/>
@@ -89,7 +89,7 @@
                             <outlet property="delegate" destination="zLP-TG-TMf" id="JdW-nQ-a2w"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="Nwi-pg-FNR"/>
+                    <tabBarItem key="tabBarItem" title="History" image="barHistory.png" id="Nwi-pg-FNR"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iOO-YH-WEO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -113,7 +113,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="meal1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Fku-7z-5RQ">
-                                            <rect key="frame" x="5" y="-188.5" width="70" height="420.5"/>
+                                            <rect key="frame" x="5" y="-175.5" width="70" height="420.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="70" id="ybf-SS-iem"/>
                                             </constraints>
@@ -242,7 +242,7 @@
                             <outlet property="delegate" destination="3Mo-OF-UPf" id="s0v-e9-RT2"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="2x4-zq-CCL"/>
+                    <tabBarItem key="tabBarItem" title="Meals" image="barMeal.png" id="2x4-zq-CCL"/>
                     <navigationItem key="navigationItem" title="Title" id="kKl-un-gW3"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
@@ -250,7 +250,7 @@
             </objects>
             <point key="canvasLocation" x="2350" y="609"/>
         </scene>
-        <!--Title-->
+        <!--Add Meal-->
         <scene sceneID="Ee6-Yc-fFa">
             <objects>
                 <viewController id="oOi-jF-Hoi" customClass="CreateMealViewController" customModule="diary" customModuleProvider="target" sceneMemberID="viewController">
@@ -259,60 +259,72 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EJa-1Z-3Q8">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="-8" width="375" height="44"/>
                                 <items>
-                                    <navigationItem title="Add Meal" id="XAu-h8-zGQ"/>
+                                    <navigationItem title="Add Meal" id="XAu-h8-zGQ">
+                                        <barButtonItem key="leftBarButtonItem" style="plain" id="zO6-Jh-7WZ">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="RxY-7b-6iA">
+                                                <rect key="frame" x="16" y="7" width="83" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="addImg.png" translatesAutoresizingMaskIntoConstraints="NO" id="8MV-py-TvS">
-                                <rect key="frame" x="10" y="70" width="150" height="150"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addImg.png" translatesAutoresizingMaskIntoConstraints="NO" id="8MV-py-TvS">
+                                <rect key="frame" x="10" y="74" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="lUG-qS-MJ2"/>
                                     <constraint firstAttribute="width" constant="150" id="xVK-NV-qek"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qvp-VB-7Ve">
-                                <rect key="frame" x="170" y="195" width="195" height="22"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cfb-QF-iu2">
+                                <rect key="frame" x="165" y="194" width="200" height="30"/>
                                 <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gJv-uy-qkl">
-                                <rect key="frame" x="10" y="228" width="355" height="388"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eZO-m6-hp5">
+                                <rect key="frame" x="10" y="232" width="355" height="423"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="8MV-py-TvS" firstAttribute="top" secondItem="EJa-1Z-3Q8" secondAttribute="bottom" constant="10" id="0vA-17-PFW"/>
-                            <constraint firstItem="wVw-bl-yQo" firstAttribute="trailing" secondItem="qvp-VB-7Ve" secondAttribute="trailing" constant="10" id="2gk-fD-GwT"/>
-                            <constraint firstItem="qvp-VB-7Ve" firstAttribute="top" secondItem="EJa-1Z-3Q8" secondAttribute="bottom" constant="130" id="87u-db-GFx"/>
-                            <constraint firstItem="EJa-1Z-3Q8" firstAttribute="centerX" secondItem="wVw-bl-yQo" secondAttribute="centerX" id="fwn-bc-lJq"/>
-                            <constraint firstItem="qvp-VB-7Ve" firstAttribute="leading" secondItem="8MV-py-TvS" secondAttribute="trailing" constant="10" id="ivp-95-G3S"/>
-                            <constraint firstItem="8MV-py-TvS" firstAttribute="leading" secondItem="wVw-bl-yQo" secondAttribute="leading" constant="10" id="tQw-ir-ksw"/>
+                            <constraint firstItem="cfb-QF-iu2" firstAttribute="leading" secondItem="8MV-py-TvS" secondAttribute="trailing" constant="10" id="7IZ-uz-t7O"/>
+                            <constraint firstItem="eZO-m6-hp5" firstAttribute="top" secondItem="8MV-py-TvS" secondAttribute="bottom" constant="10" id="I7T-5B-tZm"/>
+                            <constraint firstAttribute="bottom" secondItem="eZO-m6-hp5" secondAttribute="bottom" constant="50" id="S3W-jN-81b"/>
+                            <constraint firstItem="eZO-m6-hp5" firstAttribute="leading" secondItem="wVw-bl-yQo" secondAttribute="leading" constant="10" id="bJB-wJ-BTV"/>
+                            <constraint firstItem="8MV-py-TvS" firstAttribute="leading" secondItem="wVw-bl-yQo" secondAttribute="leading" constant="10" id="iCc-uT-lPm"/>
+                            <constraint firstItem="wVw-bl-yQo" firstAttribute="trailing" secondItem="cfb-QF-iu2" secondAttribute="trailing" constant="10" id="mmJ-kZ-fyB"/>
+                            <constraint firstItem="8MV-py-TvS" firstAttribute="top" secondItem="wVw-bl-yQo" secondAttribute="top" constant="10" id="ptV-87-SWM"/>
+                            <constraint firstAttribute="bottom" secondItem="eZO-m6-hp5" secondAttribute="bottom" constant="10" id="vdz-8h-vgM"/>
+                            <constraint firstItem="cfb-QF-iu2" firstAttribute="leading" secondItem="8MV-py-TvS" secondAttribute="trailing" constant="5" id="wQw-dD-MAs"/>
+                            <constraint firstItem="8MV-py-TvS" firstAttribute="top" secondItem="EJa-1Z-3Q8" secondAttribute="bottom" constant="38" id="xxD-b0-qSO"/>
+                            <constraint firstItem="eZO-m6-hp5" firstAttribute="trailing" secondItem="wVw-bl-yQo" secondAttribute="trailing" constant="-10" id="yc2-gc-j4u"/>
+                            <constraint firstItem="cfb-QF-iu2" firstAttribute="top" secondItem="wVw-bl-yQo" secondAttribute="top" constant="130" id="yte-bC-IgM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wVw-bl-yQo"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="wNc-kM-d1Z">
+                    <navigationItem key="navigationItem" title="Add Meal" id="wNc-kM-d1Z">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="lE4-jT-P3S">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZjR-FE-6rZ">
                                 <rect key="frame" x="276" y="7" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="btnAddClicked:" destination="oOi-jF-Hoi" eventType="touchUpInside" id="7mq-eR-wat"/>
+                                </connections>
                             </button>
-                            <connections>
-                                <segue destination="3Mo-OF-UPf" kind="show" id="1sD-23-qhx"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="img" destination="8MV-py-TvS" id="1Yr-2y-liN"/>
-                        <outlet property="ingredients" destination="gJv-uy-qkl" id="YYM-oi-wzs"/>
-                        <outlet property="name" destination="qvp-VB-7Ve" id="PXI-Oj-ffG"/>
+                        <outlet property="ingredients" destination="eZO-m6-hp5" id="6wF-FM-mYm"/>
+                        <outlet property="name" destination="cfb-QF-iu2" id="pCx-KP-G3c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ako-CV-uDB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -391,7 +403,7 @@
                         <viewLayoutGuide key="safeArea" id="kWD-Bs-4an"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <tabBarItem key="tabBarItem" title="Item" id="0g1-ch-l3X"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="barHome.png" id="0g1-ch-l3X"/>
                     <connections>
                         <outlet property="labelToday" destination="QL8-7b-A1I" id="J2B-kG-vfd"/>
                     </connections>
@@ -608,72 +620,6 @@
             </objects>
             <point key="canvasLocation" x="3372" y="-1580.0599700149926"/>
         </scene>
-        <!--Title-->
-        <scene sceneID="0sk-Fu-vWp">
-            <objects>
-                <viewController id="leR-UR-feN" customClass="CreateMealViewController" customModule="diary" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ma6-lh-q2B">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eML-CZ-Swj">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="Add Drink" id="7aY-T9-uHH"/>
-                                </items>
-                            </navigationBar>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="addImg.png" translatesAutoresizingMaskIntoConstraints="NO" id="QN4-WV-Bi5">
-                                <rect key="frame" x="10" y="70" width="150" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="551-5P-R9U"/>
-                                    <constraint firstAttribute="height" constant="150" id="YLr-rF-bQY"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0rM-K2-HvS">
-                                <rect key="frame" x="170" y="195" width="195" height="22"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="j7O-cM-e2c">
-                                <rect key="frame" x="10" y="228" width="355" height="388"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="QN4-WV-Bi5" firstAttribute="top" secondItem="eML-CZ-Swj" secondAttribute="bottom" constant="10" id="8s4-r4-JeG"/>
-                            <constraint firstItem="0rM-K2-HvS" firstAttribute="top" secondItem="eML-CZ-Swj" secondAttribute="bottom" constant="130" id="Fa6-fm-YaF"/>
-                            <constraint firstItem="f1H-UH-ckE" firstAttribute="trailing" secondItem="0rM-K2-HvS" secondAttribute="trailing" constant="10" id="Gw1-Kh-qLR"/>
-                            <constraint firstItem="0rM-K2-HvS" firstAttribute="leading" secondItem="QN4-WV-Bi5" secondAttribute="trailing" constant="10" id="dzt-1F-Tyr"/>
-                            <constraint firstItem="eML-CZ-Swj" firstAttribute="centerX" secondItem="f1H-UH-ckE" secondAttribute="centerX" id="ibr-vQ-AIf"/>
-                            <constraint firstItem="QN4-WV-Bi5" firstAttribute="leading" secondItem="f1H-UH-ckE" secondAttribute="leading" constant="10" id="sdH-Gp-zVg"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="f1H-UH-ckE"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Title" id="tky-0D-dg9">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="vks-se-aSK">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4RQ-mS-fhr">
-                                <rect key="frame" x="276" y="7" width="83" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Add"/>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="img" destination="QN4-WV-Bi5" id="VTz-AP-Mb8"/>
-                        <outlet property="ingredients" destination="j7O-cM-e2c" id="Zgh-4b-KuM"/>
-                        <outlet property="name" destination="0rM-K2-HvS" id="y3W-OO-SbE"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Sup-Yy-gZe" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3180" y="1609"/>
-        </scene>
         <!--Meals-->
         <scene sceneID="7tG-at-W66">
             <objects>
@@ -745,7 +691,7 @@
                             <outlet property="delegate" destination="lGr-Zf-7iK" id="bzL-29-oaj"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="nED-Mo-P8e"/>
+                    <tabBarItem key="tabBarItem" title="Drinks" image="barDrink.png" id="nED-Mo-P8e"/>
                     <navigationItem key="navigationItem" title="Title" id="jex-nS-et9"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
@@ -756,9 +702,10 @@
     </scenes>
     <resources>
         <image name="addImg.png" width="256" height="256"/>
+        <image name="barDrink.png" width="30" height="30"/>
+        <image name="barHistory.png" width="30" height="30"/>
+        <image name="barHome.png" width="30" height="30"/>
+        <image name="barMeal.png" width="30" height="30"/>
         <image name="meal1.jpg" width="700" height="420"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="Fb6-9C-VZf"/>
-    </inferredMetricsTieBreakers>
 </document>

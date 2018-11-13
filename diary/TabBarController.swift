@@ -10,5 +10,4 @@ import UIKit
 
 class TabBarController: UITabBarController {
     var viewModels = ViewModels()
-    
 }

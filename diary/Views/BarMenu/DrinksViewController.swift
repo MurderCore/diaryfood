@@ -10,8 +10,11 @@ import UIKit
 
 class DrinksViewController: UITableViewController {
 
+    var bar: TabBarController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        bar = (navigationController?.viewControllers[0] as! TabBarController)
     }
 }
 
@@ -19,7 +22,7 @@ class DrinksViewController: UITableViewController {
 // MARK: - Create table
 extension DrinksViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return (bar?.viewModels.drinks?.getRowsCount())!
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

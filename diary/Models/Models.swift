@@ -22,8 +22,18 @@ class Meal: Food {
 }
 
 class Food {
-    @NSManaged var id: Int16
+    @NSManaged var id: Int32
     @NSManaged var name: String
     @NSManaged var ingredients: String
-    @NSManaged var image: String
+    @NSManaged var image: NSData
+}
+
+class DrinkConsumed: Consumed {
+}
+class MealConsumed: Consumed {
+}
+
+class Consumed {
+    @NSManaged var id: Int16
+    @NSManaged var quantity: Int
 }

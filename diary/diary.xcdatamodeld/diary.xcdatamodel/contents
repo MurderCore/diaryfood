@@ -5,15 +5,15 @@
         <relationship name="drinks" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Drinks" syncable="YES"/>
         <relationship name="meals" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Meals" syncable="YES"/>
     </entity>
-    <entity name="Drinks" representedClassName="Drinks" syncable="YES" codeGenerationType="class">
+    <entity name="Drinks" representedClassName=".Drinks" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="ingredients" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Meals" representedClassName="Drinks" syncable="YES" codeGenerationType="class">
+    <entity name="Meals" representedClassName=".Drinks" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="ingredients" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
