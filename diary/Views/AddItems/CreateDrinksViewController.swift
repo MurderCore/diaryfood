@@ -8,23 +8,25 @@
 
 import UIKit
 
-class CreateMealViewController: UIViewController {
-
+class CreateDrinkViewController: UIViewController {
     
+    
+
+    @IBOutlet weak var ingredients: UITextView!
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var name: UITextField!
-    @IBOutlet weak var ingredients: UITextView!
+    
     
     var imgPicker = UIImagePickerController()
     var imagePicked = false
     
     // vm - ViewModel
-    var vm: CreateMealViewModel?
+    var vm: CreateDrinkViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        vm = (navigationController?.viewControllers[0] as! TabBarController).viewModels.createMeal
+        vm = (navigationController?.viewControllers[0] as! TabBarController).viewModels.createDrink
         
         configPlaceholder()
         configImgPicker()
@@ -46,7 +48,7 @@ class CreateMealViewController: UIViewController {
 
 
 // MARK: - CREATE VIEW
-extension CreateMealViewController: UITextViewDelegate {
+extension CreateDrinkViewController: UITextViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
@@ -74,7 +76,7 @@ extension CreateMealViewController: UITextViewDelegate {
 
 
 // MARK: - IMAGE PICKER CONTROLLER
-extension CreateMealViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+extension CreateDrinkViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     func configImgPicker(){
         imgPicker.delegate = self
@@ -98,9 +100,6 @@ extension CreateMealViewController: UINavigationControllerDelegate, UIImagePicke
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             img.image = image
-            
-            print("Image width is: \(img.image?.size.width)")
-            
         }
         dismiss(animated: true, completion: {() in
             self.imagePicked = true

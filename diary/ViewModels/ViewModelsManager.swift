@@ -16,11 +16,17 @@ class ViewModels {
     var meals: MealsViewModel?
     var drinks: DrinksViewModel?
     var createMeal: CreateMealViewModel?
+    var createDrink: CreateDrinkViewModel?
+    var history: HistoryViewModel?
+    var addMeal: AddMealViewModel?
     
     init() {
         meals = MealsViewModel(foodManager: db)
         drinks = DrinksViewModel(foodManager: db)
         createMeal = CreateMealViewModel(db: db)
+        createDrink = CreateDrinkViewModel(db: db)
+        history = HistoryViewModel(db: db)
+        addMeal = AddMealViewModel(db: db)
     }
 }
 

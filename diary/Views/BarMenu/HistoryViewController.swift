@@ -10,8 +10,11 @@ import UIKit
 
 class HistoryViewController: UITableViewController {
 
+    var vm: HistoryViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        vm = (navigationController?.viewControllers[0] as! TabBarController).viewModels.history
     }
 }
 
@@ -20,11 +23,13 @@ class HistoryViewController: UITableViewController {
 
 extension HistoryViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return (vm?.getNumberOfRows())!
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        let id = tableView.cellForRow(at: indexPath)?.restorationIdentifier
+        cell?.textLabel?.text = vm?.getCellDate(byId: Int(id!)!)
         return cell!
     }
     

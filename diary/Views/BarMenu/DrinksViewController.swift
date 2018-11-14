@@ -10,11 +10,11 @@ import UIKit
 
 class DrinksViewController: UITableViewController {
 
-    var bar: TabBarController?
+    var vm: DrinksViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bar = (navigationController?.viewControllers[0] as! TabBarController)
+        vm = (navigationController?.viewControllers[0] as! TabBarController).viewModels.drinks
     }
 }
 
@@ -22,15 +22,25 @@ class DrinksViewController: UITableViewController {
 // MARK: - Create table
 extension DrinksViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (bar?.viewModels.drinks?.getRowsCount())!
+        return (vm?.getRowsCount())!
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = (tableView.dequeueReusableCell(withIdentifier: "cell") as? CustomCell)
+        var cell = (tableView.dequeueReusableCell(withIdentifier: "cell") as? CustomCell)
+        cell = vm?.getCell(byIndex: indexPath.row, cell: cell!)
         return cell!
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        tableView.reloadData()
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let id = tableView.cellForRow(at: indexPath)?.restorationIdentifier
+            vm?.remove(atId: Int(id!)!)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
 }

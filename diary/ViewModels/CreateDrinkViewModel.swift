@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateMealViewModel {
+class CreateDrinkViewModel {
     
     var db: FoodManager?
     var missing = ""
@@ -43,9 +43,9 @@ class CreateMealViewModel {
     
     
     func addMeal(ingredients: String, name: String, img: UIImageView){
-        let count = (db?.fetchCount(type: "Meals"))!
+        let count = (db?.fetchCount(type: "Drinks"))!
         let imgData: NSData = UIImagePNGRepresentation(img.image!)! as NSData
-        db?.addFood(id: Int32(count), name: name, ingredients: ingredients, image: imgData, type: "Meals")
+        db?.addFood(id: Int32(count), name: name, ingredients: ingredients, image: imgData, type: "Drinks")
     }
 }
 

@@ -38,9 +38,8 @@ extension MealsViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            print("Cell id is: \(tableView.cellForRow(at: indexPath)?.restorationIdentifier)")
-            let id = ((tableView.cellForRow(at: indexPath)?.restorationIdentifier)! as? Int)
-            vm?.remove(atId: id!)
+            let id = tableView.cellForRow(at: indexPath)?.restorationIdentifier
+            vm?.remove(atId: Int(id!)!)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }

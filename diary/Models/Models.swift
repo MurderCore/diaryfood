@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 class Day {
-    @NSManaged var date: Date
+    @NSManaged var date: String
     @NSManaged var meals: NSSet
     @NSManaged var drinks: NSSet
 }
@@ -34,6 +34,6 @@ class MealConsumed: Consumed {
 }
 
 class Consumed {
-    @NSManaged var id: Int16
-    @NSManaged var quantity: Int
+    @NSManaged var id: Int32
+    @NSManaged var quantity: Int16
 }
