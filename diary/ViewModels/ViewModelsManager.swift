@@ -19,6 +19,7 @@ class ViewModels {
     var createDrink: CreateDrinkViewModel?
     var history: HistoryViewModel?
     var addMeal: AddMealViewModel?
+    var addDrink: AddDrinkViewModel?
     
     init() {
         meals = MealsViewModel(foodManager: db)
@@ -27,6 +28,7 @@ class ViewModels {
         createDrink = CreateDrinkViewModel(db: db)
         history = HistoryViewModel(db: db)
         addMeal = AddMealViewModel(db: db)
+        addDrink = AddDrinkViewModel(db: db)
     }
 }
 

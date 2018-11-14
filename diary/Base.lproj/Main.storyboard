@@ -514,6 +514,9 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="btnDone" destination="gpm-4b-ySM" id="gbg-B6-G7A"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t6E-D0-5aL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
