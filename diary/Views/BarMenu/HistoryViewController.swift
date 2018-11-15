@@ -28,12 +28,18 @@ extension HistoryViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        let id = tableView.cellForRow(at: indexPath)?.restorationIdentifier
-        cell?.textLabel?.text = vm?.getCellDate(byId: Int(id!)!)
+        cell?.textLabel?.text = vm?.getCellDate(byIndex: indexPath.row)
         return cell!
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let id = tableView.cellForRow(at: indexPath)?.restorationIdentifier
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
 }

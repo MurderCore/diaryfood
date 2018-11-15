@@ -31,8 +31,6 @@ class DrinksViewModel {
         preset.name.text = fetchedMeal?.value(forKey: "name") as! String
         preset.restorationIdentifier = String(id)
         
-        print("cell id is \(id)")
-        
         return preset
     }
     

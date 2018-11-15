@@ -107,6 +107,12 @@ extension CreateDrinkViewController: UINavigationControllerDelegate, UIImagePick
     }
 }
 
+class CustomCell: UITableViewCell {
+    @IBOutlet weak var img: UIImageView!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var ingredients: UILabel!
+}
+
 
 
 

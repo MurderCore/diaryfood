@@ -13,16 +13,16 @@ class FoodManager {
     
     private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     private var frc: NSFetchedResultsController<NSFetchRequestResult>!
+    private var fetchRequest: NSFetchRequest<NSFetchRequestResult>?
     
     init() {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Days")
-        fetchRequest.sortDescriptors = [
+        fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Days")
+        fetchRequest?.sortDescriptors = [
             NSSortDescriptor(key: "date", ascending: true)
         ]
         
-        frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context!,
+        frc = NSFetchedResultsController(fetchRequest: fetchRequest!, managedObjectContext: context!,
                                          sectionNameKeyPath: nil, cacheName: nil)
-        
     }
     
     
@@ -69,47 +69,33 @@ class FoodManager {
         storedItem.setValue(ingredients, forKey: "ingredients")
         storedItem.setValue(image, forKey: "image")
         
-        do {
-            try context?.save()
-            print("\(name) saved succesfully")
-        } catch {
-            print("Error saving \(name) to DB")
-        }
-        print("stored item id now is \(storedItem.value(forKey: "id")!)")
+        saveContext()
     }
     
     func removeFood(byId id: Int, type: String){
         let food = fetchFood(byId: id, type: type)
         context?.delete(food)
+        saveContext()
     }
     
     
     
     // MARK: -  HISTORY METHODS ######
     func fetchHistory() -> [NSManagedObject] {
-        var res: [NSManagedObject] = []
-        let request = NSFetchRequest<NSManagedObject>(entityName: "Days")
         do {
-            try res = (context?.fetch(request))!
+            try frc.performFetch()
         } catch {
             print("Error fetching history")
         }
-        return res
+        return frc.sections?[0].objects as! [NSManagedObject]
     }
     
     func fetchHistoryCount() -> Int {
         return fetchHistory().count
     }
     
-    func fetchHistory(byId id: Int) -> NSManagedObject {
-        var res = NSManagedObject()
-        for hist in fetchHistory() {
-            if hist.value(forKey: "id") as! Int32 == id {
-                res = hist
-                break
-            }
-        }
-        return res
+    func fetchHistory(byIndex id: Int) -> NSManagedObject {
+        return fetchHistory()[id]
     }
     
     func existDay(date: String) -> Bool {
@@ -127,11 +113,7 @@ class FoodManager {
         let stored = NSManagedObject(entity: entity!, insertInto: context)
         
         stored.setValue(date, forKey: "date")
-        do {
-            try context?.save()
-        } catch {
-            print("Saving date error")
-        }
+        saveContext()
     }
     
     
@@ -147,10 +129,43 @@ class FoodManager {
         food.setValue(quantity, forKey: "quantity")
         
         if let fetchResults = try? context?.fetch(fetchReq) as? [NSManagedObject] {
-            var day = fetchResults![0]
+            let day = fetchResults![0]
             let key = (foodType == "MealConsumed") ? "meals" : "drinks"
             day.mutableSetValue(forKey: key).add(food)
-            print("To date \(date) added meal id \(foodId) (\(quantity)g")
+            print("To date \(date) added \(foodType) id \(foodId) (\(quantity)g")
+        }
+    }
+
+    
+    func getFood(byDate date: String, type: String) {
+        findDay(byDate: date)
+        
+        let day = frc.sections?[0].objects![0] as! NSManagedObject
+        let foodIds = day.value(forKey: type) as! NSSet
+        
+        print("\(type) id's for date \(date)")
+        print()
+    }
+    
+    func deleteHistory(date: String){
+        
+    }
+    
+    // MARK: - Helpers
+    func saveContext(){
+        do {
+            try context?.save()
+        } catch {
+            print("Error saving context")
+        }
+    }
+    
+    func findDay(byDate date: String){
+        let predicate = NSPredicate(format: "date == %@", date)
+        frc.fetchRequest.predicate = predicate
+        do {
+            try frc.performFetch()
+        } catch {
         }
     }
 }

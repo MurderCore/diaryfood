@@ -20,12 +20,8 @@ class HistoryViewModel {
         return (db?.fetchHistoryCount())!
     }
     
-    func getCellDate(byId id: Int) -> String {
-        let date = db?.fetchHistory(byId: id).value(forKey: "date") as! NSDate
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        let time : String = formatter.string(from: date as Date)
-        return time
+    func getCellDate(byIndex id: Int) -> String {
+        let date = db?.fetchHistory(byIndex: id).value(forKey: "date") as! String
+        return date
     }
 }

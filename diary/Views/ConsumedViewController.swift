@@ -12,26 +12,29 @@ class ConsumedViewController: UITableViewController {
 
     @IBOutlet weak var barTitle: UINavigationItem!
     
-    var bar: TabBarController?
+    var vm: ConsumedViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bar = (navigationController?.viewControllers[0] as! TabBarController)
-        
-        barTitle.title = bar?.viewModels.root.getCurrentDate()
+        vm = (navigationController?.viewControllers[0] as! TabBarController).viewModels.consumed
+        barTitle.title = (navigationController?.viewControllers[0] as! TabBarController).viewModels.root.getCurrentDate()
     }
 }
 
 // MARK: - Create table
 extension ConsumedViewController {
     
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return ["Meals", "Drinks"]
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return (vm?.getRowsNumb(forSection: section, date: barTitle.title!))!
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,5 +44,13 @@ extension ConsumedViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let id = tableView.cellForRow(at: indexPath)?.restorationIdentifier
+            // DELETE A FOOD $$$$$$$$$
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
 }
