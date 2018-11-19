@@ -24,4 +24,8 @@ class HistoryViewModel {
         let date = db?.fetchHistory(byIndex: id).value(forKey: "date") as! String
         return date
     }
+    
+    func deleteDay(byDate date: String){
+        db?.deleteHistory(date: date)
+    }
 }

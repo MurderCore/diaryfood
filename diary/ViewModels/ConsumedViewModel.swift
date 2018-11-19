@@ -34,4 +34,8 @@ class ConsumedViewModel {
         
         return preset
     }
+    
+    func deleteFoodFromDate(date: String, type: String, id: String){
+        db?.deleteFoodFromDate(date: date, type: type, foodId: Int(id)!)
+    }
 }

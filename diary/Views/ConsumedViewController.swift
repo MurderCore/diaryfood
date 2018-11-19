@@ -49,8 +49,12 @@ extension ConsumedViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            
             let id = tableView.cellForRow(at: indexPath)?.restorationIdentifier
-            // DELETE A FOOD $$$$$$$$$
+            let date = barTitle.title!
+            let type = (indexPath.section == 0) ? "MealConsumed" : "DrinkConsumed"
+            
+            vm?.deleteFoodFromDate(date: date, type: type, id: id!)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }

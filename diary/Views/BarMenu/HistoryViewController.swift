@@ -39,7 +39,8 @@ extension HistoryViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let id = tableView.cellForRow(at: indexPath)?.restorationIdentifier
+            let date = tableView.cellForRow(at: indexPath)?.textLabel?.text!
+            vm?.deleteDay(byDate: date!)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }

@@ -27,12 +27,12 @@ class FoodManager {
         frc = NSFetchedResultsController(fetchRequest: fetchRequest!, managedObjectContext: context!,
                                          sectionNameKeyPath: nil, cacheName: nil)
         
-        populateDataBase()
-        /*populated = UserDefaults.standard.bool(forKey: "popolated")
+        populated = UserDefaults.standard.bool(forKey: "populated")
          if !populated {
-         populateDataBase()
-         UserDefaults.standard.set(true, forKey: "populated")
-         }*/
+            populateDataBase()
+            UserDefaults.standard.set(true, forKey: "populated")
+            UserDefaults.standard.synchronize()
+         }
     }
     
     
@@ -104,6 +104,7 @@ class FoodManager {
     
     // MARK: -  HISTORY METHODS ######
     func fetchHistory() -> [NSManagedObject] {
+        frc.fetchRequest.predicate = nil
         do {
             try frc.performFetch()
         } catch {
@@ -157,27 +158,35 @@ class FoodManager {
         }
         saveContext()
     }
+    
+    func deleteFoodFromDate(date: String, type: String, foodId: Int){
+        
+        let typeFood = (type == "MealConsumed") ? "Meals" : "Drinks"
+        let food = fetchFood(byId: foodId, type: typeFood)
+        context?.delete(food)
+        saveContext()
+    }
 
     
     func getFood(byDate date: String, type: String) -> [NSManagedObject] {
-        findDay(byDate: date)
-        
-        let day = frc.sections?[0].objects![0] as! NSManagedObject
+        let day = findDay(byDate: date)
         let foodIds = day.value(forKey: type) as! NSSet
         
         return foodIds.allObjects as! [NSManagedObject]
     }
     
     func getFoodCountByDate(date: String, type: String) -> Int {
-        print("returned \(getFood(byDate: date, type: type).count) of type \(type)")
         return getFood(byDate: date, type: type).count
     }
     
     func deleteHistory(date: String){
-        
+        let day = findDay(byDate: date)
+        context?.delete(day)
+        saveContext()
     }
     
-    // MARK: - Helpers
+    
+    // HELPERS @@@@
     func saveContext(){
         do {
             try context?.save()
@@ -186,15 +195,15 @@ class FoodManager {
         }
     }
     
-    func findDay(byDate date: String){
+    func findDay(byDate date: String) -> NSManagedObject{
         let predicate = NSPredicate(format: "date == %@", date)
         frc.fetchRequest.predicate = predicate
         do {
             try frc.performFetch()
         } catch {
         }
+        return frc.sections?[0].objects![0] as! NSManagedObject
     }
-    
     
     func populateDataBase(){
         
