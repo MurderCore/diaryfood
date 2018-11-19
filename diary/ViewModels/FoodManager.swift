@@ -11,6 +11,9 @@ import CoreData
 
 class FoodManager {
     
+    var populated = false
+
+    
     private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     private var frc: NSFetchedResultsController<NSFetchRequestResult>!
     private var fetchRequest: NSFetchRequest<NSFetchRequestResult>?
@@ -23,6 +26,13 @@ class FoodManager {
         
         frc = NSFetchedResultsController(fetchRequest: fetchRequest!, managedObjectContext: context!,
                                          sectionNameKeyPath: nil, cacheName: nil)
+        
+        populateDataBase()
+        /*populated = UserDefaults.standard.bool(forKey: "popolated")
+         if !populated {
+         populateDataBase()
+         UserDefaults.standard.set(true, forKey: "populated")
+         }*/
     }
     
     
@@ -40,7 +50,14 @@ class FoodManager {
 
     
     func fetchFood(byIndex id: Int, type: String) -> NSManagedObject {
-        return fetchFood(type: type)[id]
+        var foundedFood = NSManagedObject()
+        for food in fetchFood(type: type) {
+            if food.value(forKey: "id") as! Int == id {
+                foundedFood = food
+                break
+            }
+        }
+        return foundedFood
     }
 
     func fetchFood(byId id: Int, type: String) -> NSManagedObject {
@@ -60,6 +77,11 @@ class FoodManager {
     }
     
     func addFood(id: Int32, name: String, ingredients: String, image: NSData , type: String){
+        
+        print("NEW ITEM ADDING ####")
+        print("id \(id)")
+        print("name \(name)")
+        print("ingredients \(ingredients)")
         
         let entity = NSEntityDescription.entity(forEntityName: "\(type)", in: context!)
         let storedItem = NSManagedObject(entity: entity!, insertInto: context)
@@ -132,19 +154,23 @@ class FoodManager {
             let day = fetchResults![0]
             let key = (foodType == "MealConsumed") ? "meals" : "drinks"
             day.mutableSetValue(forKey: key).add(food)
-            print("To date \(date) added \(foodType) id \(foodId) (\(quantity)g")
         }
+        saveContext()
     }
 
     
-    func getFood(byDate date: String, type: String) {
+    func getFood(byDate date: String, type: String) -> [NSManagedObject] {
         findDay(byDate: date)
         
         let day = frc.sections?[0].objects![0] as! NSManagedObject
         let foodIds = day.value(forKey: type) as! NSSet
         
-        print("\(type) id's for date \(date)")
-        print()
+        return foodIds.allObjects as! [NSManagedObject]
+    }
+    
+    func getFoodCountByDate(date: String, type: String) -> Int {
+        print("returned \(getFood(byDate: date, type: type).count) of type \(type)")
+        return getFood(byDate: date, type: type).count
     }
     
     func deleteHistory(date: String){
@@ -168,40 +194,38 @@ class FoodManager {
         } catch {
         }
     }
-}
-
-
-/*
-class Blabla {
     
-    func save(item: Item, labels: [Label]) {
+    
+    func populateDataBase(){
         
-        let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "Item", in: context!)
-        
-        let storedItem = NSManagedObject(entity: entity!, insertInto: context)
-        storedItem.setValue(item.name, forKey: "name")
-        storedItem.setValue(NSSet(objects: labels), forKey: "labels")
-        
-        do {
-            try context?.save()
-            items.append(storedItem)
-        } catch {
-            print("Saving data error")
+        func populateFood(type: String, myDict: NSDictionary) {
+            for i in 1...(myDict["\(type)Count"] as! Int) {
+                
+                var imgData: NSData?
+                let path = ((myDict["\(type)\(i)"] as! NSDictionary)["image"]) as! String
+                if let filePath = Bundle.main.path(forResource: path, ofType: ""), let image = UIImage(contentsOfFile: filePath) {
+                    imgData = UIImagePNGRepresentation(image)! as NSData
+                }
+                let ingredients = ((myDict["\(type)\(i)"] as! NSDictionary)["ingredients"])!
+                let name = ((myDict["\(type)\(i)"] as! NSDictionary)["name"])!
+                let id = ((myDict["\(type)\(i)"] as! NSDictionary)["id"])!
+                
+                addFood(id: id as! Int32, name: name as! String, ingredients: ingredients as! String, image: imgData!, type: "\(type)s")
+            }
         }
         
-    }
-    
-    func fetchData(){
-        
-        let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
-        let request = NSFetchRequest<NSManagedObject>(entityName: "Items")
-        
-        do {
-            try items = (context?.fetch(request))!
-        } catch {
-            print("Error fetching data")
+        if let path = Bundle.main.path(forResource: "Food", ofType: "plist"),
+            let myDict = NSDictionary(contentsOfFile: path)
+        {
+            populateFood(type: "Meal", myDict: myDict)
+            populateFood(type: "Drink", myDict: myDict)
         }
     }
 }
- */
+
+
+
+
+
+
+

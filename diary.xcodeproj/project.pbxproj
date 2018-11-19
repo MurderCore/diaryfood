@@ -22,6 +22,11 @@
 		572071D72199DEA200ACAE52 /* barHistory.png in Resources */ = {isa = PBXBuildFile; fileRef = 572071D32199DEA100ACAE52 /* barHistory.png */; };
 		572071D82199DEA200ACAE52 /* barMeal.png in Resources */ = {isa = PBXBuildFile; fileRef = 572071D42199DEA200ACAE52 /* barMeal.png */; };
 		574F75B5219AFD26007F55BB /* CreateMealViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574F75B4219AFD26007F55BB /* CreateMealViewModel.swift */; };
+		575992EC21A2F82B008C50ED /* mamaliga.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 575992E721A2F82A008C50ED /* mamaliga.jpg */; };
+		575992ED21A2F82B008C50ED /* sandwich.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 575992E821A2F82A008C50ED /* sandwich.jpg */; };
+		575992EE21A2F82B008C50ED /* cola.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 575992E921A2F82A008C50ED /* cola.jpeg */; };
+		575992EF21A2F82B008C50ED /* sprite.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 575992EA21A2F82A008C50ED /* sprite.jpg */; };
+		575992F021A2F82B008C50ED /* turkey.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 575992EB21A2F82A008C50ED /* turkey.jpeg */; };
 		57693A9B21998BA700B216B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57693A9A21998BA700B216B0 /* AppDelegate.swift */; };
 		57693AA321998BA700B216B0 /* diary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 57693AA121998BA700B216B0 /* diary.xcdatamodeld */; };
 		57693AA521998BA800B216B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57693AA421998BA800B216B0 /* Assets.xcassets */; };
@@ -58,6 +63,11 @@
 		572071D32199DEA100ACAE52 /* barHistory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barHistory.png; sourceTree = "<group>"; };
 		572071D42199DEA200ACAE52 /* barMeal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barMeal.png; sourceTree = "<group>"; };
 		574F75B4219AFD26007F55BB /* CreateMealViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMealViewModel.swift; sourceTree = "<group>"; };
+		575992E721A2F82A008C50ED /* mamaliga.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mamaliga.jpg; sourceTree = "<group>"; };
+		575992E821A2F82A008C50ED /* sandwich.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sandwich.jpg; sourceTree = "<group>"; };
+		575992E921A2F82A008C50ED /* cola.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cola.jpeg; sourceTree = "<group>"; };
+		575992EA21A2F82A008C50ED /* sprite.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sprite.jpg; sourceTree = "<group>"; };
+		575992EB21A2F82A008C50ED /* turkey.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = turkey.jpeg; sourceTree = "<group>"; };
 		57693A9721998BA700B216B0 /* diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = diary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57693A9A21998BA700B216B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57693A9F21998BA700B216B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -116,6 +126,18 @@
 			path = "New Group";
 			sourceTree = "<group>";
 		};
+		575992E621A2F77E008C50ED /* DrinksAndMeals */ = {
+			isa = PBXGroup;
+			children = (
+				575992E921A2F82A008C50ED /* cola.jpeg */,
+				575992E721A2F82A008C50ED /* mamaliga.jpg */,
+				575992E821A2F82A008C50ED /* sandwich.jpg */,
+				575992EA21A2F82A008C50ED /* sprite.jpg */,
+				575992EB21A2F82A008C50ED /* turkey.jpeg */,
+			);
+			path = DrinksAndMeals;
+			sourceTree = "<group>";
+		};
 		5760A3E42199D5EB00521582 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +187,7 @@
 		57693AB021998C5D00B216B0 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				575992E621A2F77E008C50ED /* DrinksAndMeals */,
 				5760A3E42199D5EB00521582 /* TabBar */,
 				57693AC32199A40C00B216B0 /* addImg.png */,
 				57693AB821998D4800B216B0 /* meal1.jpg */,
@@ -282,13 +305,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				575992ED21A2F82B008C50ED /* sandwich.jpg in Resources */,
 				572071D52199DEA200ACAE52 /* barHome.png in Resources */,
 				572071D02199DD4A00ACAE52 /* Main.storyboard in Resources */,
+				575992EC21A2F82B008C50ED /* mamaliga.jpg in Resources */,
+				575992EF21A2F82B008C50ED /* sprite.jpg in Resources */,
 				572071D72199DEA200ACAE52 /* barHistory.png in Resources */,
 				57693AB921998D4900B216B0 /* meal1.jpg in Resources */,
 				572071D82199DEA200ACAE52 /* barMeal.png in Resources */,
+				575992F021A2F82B008C50ED /* turkey.jpeg in Resources */,
 				57693AC42199A40C00B216B0 /* addImg.png in Resources */,
 				572071D62199DEA200ACAE52 /* barDrink.png in Resources */,
+				575992EE21A2F82B008C50ED /* cola.jpeg in Resources */,
 				57693AA821998BA800B216B0 /* LaunchScreen.storyboard in Resources */,
 				57693AA521998BA800B216B0 /* Assets.xcassets in Resources */,
 				57693AD02199B6CD00B216B0 /* Food.plist in Resources */,

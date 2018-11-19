@@ -2,23 +2,64 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Meal</key>
+	<key>DrinkCount</key>
+	<integer>2</integer>
+	<key>MealCount</key>
+	<integer>3</integer>
+	<key>Meal3</key>
 	<dict>
+		<key>id</key>
+		<integer>1</integer>
 		<key>name</key>
-		<string></string>
+		<string>Sandwich</string>
 		<key>ingredients</key>
-		<string></string>
+		<string>bread, tomato, melon</string>
 		<key>image</key>
-		<string></string>
+		<string>sandwich.jpg</string>
 	</dict>
-	<key>Drink</key>
+	<key>Meal1</key>
 	<dict>
+		<key>id</key>
+		<integer>2</integer>
 		<key>name</key>
-		<string></string>
+		<string>Mamaliga</string>
 		<key>ingredients</key>
-		<string></string>
+		<string>carrots, water, salt, onions</string>
 		<key>image</key>
-		<string></string>
+		<string>mamaliga.jpg</string>
+	</dict>
+	<key>Meal2</key>
+	<dict>
+		<key>id</key>
+		<integer>0</integer>
+		<key>name</key>
+		<string>Turkey</string>
+		<key>ingredients</key>
+		<string>Meat, salt, turkey</string>
+		<key>image</key>
+		<string>turkey.jpeg</string>
+	</dict>
+	<key>Drink2</key>
+	<dict>
+		<key>id</key>
+		<integer>1</integer>
+		<key>name</key>
+		<string>Sprite</string>
+		<key>ingredients</key>
+		<string>water, sugar, E344</string>
+		<key>image</key>
+		<string>sprite.jpg</string>
+	</dict>
+	<key>Drink1</key>
+	<dict>
+		<key>id</key>
+		<integer>0</integer>
+		<key>name</key>
+		<string>Coca-Cola</string>
+		<key>ingredients</key>
+		<string>water, sugar, many sugar</string>
+		<key>image</key>
+		<string>cola.jpeg</string>
 	</dict>
 </dict>
 </plist>

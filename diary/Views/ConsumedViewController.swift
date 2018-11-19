@@ -25,8 +25,8 @@ class ConsumedViewController: UITableViewController {
 // MARK: - Create table
 extension ConsumedViewController {
     
-    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return ["Meals", "Drinks"]
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return (section == 0) ? "Meals" : "Drinks"
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -38,7 +38,8 @@ extension ConsumedViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        cell = vm?.getCell(byIndex: indexPath.row, cell: cell as! CustomCell, section: indexPath.section)
         return cell!
     }
     
