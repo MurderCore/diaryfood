@@ -164,7 +164,18 @@ class FoodManager {
         context?.delete(food!)
         saveContext()
     }
-
+    
+    func checkIfFoodLeft(atDate date: String) -> Bool {
+        print("Trying to find day")
+        let day = findDay(byDate: date)
+        print("Day founded!")
+        if day.mutableSetValue(forKey: "drinks").allObjects.count == 0
+            && day.mutableSetValue(forKey: "meals").allObjects.count == 0 {
+            deleteHistory(date: date)
+            return false
+        }
+        return true
+    }
     
     func getFood(byDate date: String, type: String) -> [NSManagedObject] {
         let day = findDay(byDate: date)

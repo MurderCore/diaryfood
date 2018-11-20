@@ -56,6 +56,15 @@ extension ConsumedViewController {
             
             vm?.deleteFoodFromDate(date: date, type: type, id: id!)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.reloadData()
+            
+            if !(vm?.existFoodAtDate(date: date))! {
+                navigationController?.popViewController(animated: true)
+            }
         }
     }
 }
+
+
+
+

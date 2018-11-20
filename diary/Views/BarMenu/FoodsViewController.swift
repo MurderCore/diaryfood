@@ -25,7 +25,6 @@ class FoodsViewController: UITableViewController {
 // MARK: - Create table
 extension FoodsViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("!!!")
         return (vm?.getRowsCount())!
     }
     

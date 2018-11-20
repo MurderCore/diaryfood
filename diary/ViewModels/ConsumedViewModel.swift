@@ -40,7 +40,9 @@ class ConsumedViewModel {
         return preset
     }
 
-
+    func existFoodAtDate(date: String) -> Bool {
+        return db!.checkIfFoodLeft(atDate: date)
+    }
     
     func deleteFoodFromDate(date: String, type: String, id: String){
         db?.deleteFoodFromDate(date: date, type: type, foodId: Int(id)!)
