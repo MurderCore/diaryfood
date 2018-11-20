@@ -39,7 +39,7 @@ extension ConsumedViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        cell = vm?.getCell(byIndex: indexPath.row, cell: cell as! CustomCell, section: indexPath.section)
+        cell = vm?.getCell(date: barTitle.title!, byIndex: indexPath.row, cell: cell as! CustomCell, section: indexPath.section)
         return cell!
     }
     

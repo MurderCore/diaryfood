@@ -8,21 +8,26 @@
 
 import UIKit
 
-class AddMealViewController: UITableViewController {
+class AddFoodViewController: UITableViewController {
     
-    var vm: AddMealViewModel?
-    var mealsVM: MealsViewModel?
+    var vm: AddFoodViewModel?
+    var foodVM: FoodViewModel?
     
     var lastSelected = 1
     
     var infoCell: InfoCell?
     @IBOutlet weak var btnDone: UIBarButtonItem!
+    @IBOutlet weak var navBar: UINavigationItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         btnDone.isEnabled = false
-        mealsVM = (navigationController?.viewControllers[0] as! TabBarController).viewModels.meals
-        vm = (navigationController?.viewControllers[0] as! TabBarController).viewModels.addMeal
+        foodVM = (navigationController?.viewControllers[0] as! TabBarController).viewModels.food
+        vm = (navigationController?.viewControllers[0] as! TabBarController).viewModels.addFood
+        
+        let type = (navBar.title == "Add Drink") ? "Drinks" : "Meals"
+        foodVM?.type = type
+        vm?.type = type
     }
     
     // MARK: - Button controller
@@ -34,7 +39,6 @@ class AddMealViewController: UITableViewController {
             self.present((vm?.getAlert(message: "Missing quantity"))!, animated: true, completion: nil)
             return
         }
-        
         vm?.addConsumedMeal(id: Int(id!)!, quantity: Int((infoCell?.info.text!)!)!)
         navigationController?.popViewController(animated: true)
     }
@@ -43,9 +47,9 @@ class AddMealViewController: UITableViewController {
 
 
 // MARK: - Create table
-extension AddMealViewController {
+extension AddFoodViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (mealsVM?.getRowsCount())! + 1
+        return (foodVM?.getRowsCount())! + 1
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -65,7 +69,7 @@ extension AddMealViewController {
             return q!
         }
         var cell = (tableView.dequeueReusableCell(withIdentifier: "cell") as? CustomCell)
-        cell = mealsVM?.getCell(byIndex: indexPath.row-1, cell: cell!)
+        cell = foodVM?.getCell(byIndex: indexPath.row-1, cell: cell!)
         return cell!
     }
     

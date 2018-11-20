@@ -1,5 +1,5 @@
 //
-//  DrinksViewController.swift
+//  MealsViewController.swift
 //  diary
 //
 //  Created by Victor on 11/12/18.
@@ -8,20 +8,24 @@
 
 import UIKit
 
-class DrinksViewController: UITableViewController {
+class FoodsViewController: UITableViewController {
 
-    var vm: DrinksViewModel?
+    @IBOutlet weak var navBar: UINavigationItem!
+    var vm: FoodViewModel?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm = (navigationController?.viewControllers[0] as! TabBarController).viewModels.drinks
+        vm = (navigationController?.viewControllers[0] as! TabBarController).viewModels.food
+        vm?.type = navBar.title
     }
 }
 
 
 // MARK: - Create table
-extension DrinksViewController {
+extension FoodsViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("!!!")
         return (vm?.getRowsCount())!
     }
     
@@ -33,6 +37,7 @@ extension DrinksViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        vm?.type = navBar.title
         tableView.reloadData()
     }
     

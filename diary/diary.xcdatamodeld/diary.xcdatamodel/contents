@@ -2,12 +2,14 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Days" representedClassName="Days" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="drinks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DrinkConsumed" syncable="YES"/>
-        <relationship name="meals" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MealConsumed" syncable="YES"/>
+        <relationship name="drinks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DrinkConsumed" inverseName="day" inverseEntity="DrinkConsumed" syncable="YES"/>
+        <relationship name="meals" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MealConsumed" inverseName="day" inverseEntity="MealConsumed" syncable="YES"/>
     </entity>
     <entity name="DrinkConsumed" representedClassName="DrinkConsumed" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="quantity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selfId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Days" inverseName="drinks" inverseEntity="Days" syncable="YES"/>
     </entity>
     <entity name="Drinks" representedClassName=".Drinks" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -17,7 +19,9 @@
     </entity>
     <entity name="MealConsumed" representedClassName="MealConsumed" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="quantity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selfId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Days" inverseName="meals" inverseEntity="Days" syncable="YES"/>
     </entity>
     <entity name="Meals" representedClassName=".Drinks" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -27,9 +31,9 @@
     </entity>
     <elements>
         <element name="Days" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="DrinkConsumed" positionX="-45" positionY="45" width="128" height="75"/>
-        <element name="Drinks" positionX="-54" positionY="18" width="128" height="105"/>
-        <element name="MealConsumed" positionX="-36" positionY="54" width="128" height="75"/>
-        <element name="Meals" positionX="-36" positionY="45" width="128" height="105"/>
+        <element name="DrinkConsumed" positionX="178" positionY="-27" width="128" height="103"/>
+        <element name="Drinks" positionX="295" positionY="-216" width="128" height="105"/>
+        <element name="MealConsumed" positionX="171" positionY="126" width="128" height="103"/>
+        <element name="Meals" positionX="151" positionY="-216" width="128" height="103"/>
     </elements>
 </model>

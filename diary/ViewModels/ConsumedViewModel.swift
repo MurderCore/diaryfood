@@ -21,19 +21,26 @@ class ConsumedViewModel {
         return (db?.getFoodCountByDate(date: date, type: type))!
     }
     
-    func getCell(byIndex id: Int, cell: CustomCell, section: Int) -> CustomCell {
-        let type = (section == 0) ? "Meals" : "Drinks"
-        let preset = cell
-        let fetchedMeal = db?.fetchFood(byIndex: id, type: type)
-        let id = fetchedMeal?.value(forKey: "id") as! Int32
+    func getCell(date: String, byIndex id: Int, cell: CustomCell, section: Int) -> CustomCell {
         
+        let type = (section == 0) ? "Meals" : "Drinks"
+        let typeConsumed = (type == "Drinks") ? "DrinkConsumed" : "MealConsumed"
+        
+        let preset = cell
+        let fetchedConsumed = db?.fetchConsumed(byIndex: id, type: typeConsumed, date: date)
+        let foodId = (fetchedConsumed?.value(forKey: "id") as! Int32)
+        let fetchedMeal = db?.fetchFood(byId: Int(foodId), type: type)
+        let id = fetchedConsumed?.value(forKey: "selfId") as! Int32
+
         preset.img.image = UIImage(data: (fetchedMeal?.value(forKey: "image") as! Data))
-        preset.ingredients.text = fetchedMeal?.value(forKey: "ingredients") as! String
+        preset.ingredients.text = "\(fetchedConsumed?.value(forKey: "quantity") as! String)g"
         preset.name.text = fetchedMeal?.value(forKey: "name") as! String
         preset.restorationIdentifier = String(id)
         
         return preset
     }
+
+
     
     func deleteFoodFromDate(date: String, type: String, id: String){
         db?.deleteFoodFromDate(date: date, type: type, foodId: Int(id)!)

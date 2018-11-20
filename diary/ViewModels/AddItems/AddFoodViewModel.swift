@@ -8,9 +8,10 @@
 
 import UIKit
 
-class AddMealViewModel {
+class AddFoodViewModel {
     
     var db: FoodManager?
+    var type: String?
     
     init(db: FoodManager) {
         self.db = db
@@ -21,11 +22,10 @@ class AddMealViewModel {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
         let time : String = formatter.string(from: Date())
-        
         if !(db?.existDay(date: time))! {
             db?.addDate(date: time)
         }
-        db?.addFoodToDate(date: time, foodType: "MealConsumed", foodId: id, quantity: quantity)
+        db?.addFoodToDate(date: time, foodType: type!, foodId: id, quantity: String(quantity))
     }
     
     func getAlert(message: String) -> UIAlertController {

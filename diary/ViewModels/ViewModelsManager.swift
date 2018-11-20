@@ -13,23 +13,17 @@ class ViewModels {
     var db = FoodManager()
     
     var root = RootViewModel()
-    var meals: MealsViewModel?
-    var drinks: DrinksViewModel?
-    var createMeal: CreateMealViewModel?
-    var createDrink: CreateDrinkViewModel?
+    var food: FoodViewModel?
+    var createFood: CreateFoodViewModel?
     var history: HistoryViewModel?
-    var addMeal: AddMealViewModel?
-    var addDrink: AddDrinkViewModel?
+    var addFood: AddFoodViewModel?
     var consumed: ConsumedViewModel?
     
     init() {
-        meals = MealsViewModel(foodManager: db)
-        drinks = DrinksViewModel(foodManager: db)
-        createMeal = CreateMealViewModel(db: db)
-        createDrink = CreateDrinkViewModel(db: db)
+        food = FoodViewModel(foodManager: db)
+        createFood = CreateFoodViewModel(db: db)
         history = HistoryViewModel(db: db)
-        addMeal = AddMealViewModel(db: db)
-        addDrink = AddDrinkViewModel(db: db)
+        addFood = AddFoodViewModel(db: db)
         consumed = ConsumedViewModel(db: db)
     }
 }

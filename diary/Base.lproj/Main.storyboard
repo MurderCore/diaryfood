@@ -40,7 +40,7 @@
                         <segue destination="Npw-YN-745" kind="relationship" relationship="viewControllers" id="MuQ-aa-K1H"/>
                         <segue destination="zLP-TG-TMf" kind="relationship" relationship="viewControllers" id="Y6y-CI-Df6"/>
                         <segue destination="3Mo-OF-UPf" kind="relationship" relationship="viewControllers" id="Fb6-9C-VZf"/>
-                        <segue destination="lGr-Zf-7iK" kind="relationship" relationship="viewControllers" id="tvP-8L-Xdq"/>
+                        <segue destination="wGA-vZ-bkf" kind="relationship" relationship="viewControllers" id="Xz4-hn-QPF"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d7k-2O-36g" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -170,7 +170,7 @@
         <!--Meals-->
         <scene sceneID="ZjN-Kb-fRL">
             <objects>
-                <tableViewController title="Meals" id="3Mo-OF-UPf" customClass="MealsViewController" customModule="diary" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Meals" id="3Mo-OF-UPf" customClass="FoodsViewController" customModule="diary" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Bfi-Fj-58A">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -182,7 +182,7 @@
                                 <navigationItem title="Meals" id="8Xp-dW-GS8">
                                     <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="nSA-HA-OkN">
                                         <connections>
-                                            <segue destination="oOi-jF-Hoi" kind="show" id="c7f-of-JUb"/>
+                                            <segue destination="oOi-jF-Hoi" kind="show" id="aDe-e6-e9r"/>
                                         </connections>
                                     </barButtonItem>
                                 </navigationItem>
@@ -243,8 +243,10 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Meals" image="barMeal.png" id="2x4-zq-CCL"/>
-                    <navigationItem key="navigationItem" title="Title" id="kKl-un-gW3"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="navBar" destination="8Xp-dW-GS8" id="IC4-7a-CyP"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="miT-5h-rng" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -253,7 +255,7 @@
         <!--Add Meal-->
         <scene sceneID="Ee6-Yc-fFa">
             <objects>
-                <viewController id="oOi-jF-Hoi" customClass="CreateMealViewController" customModule="diary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="oOi-jF-Hoi" customClass="CreateFoodViewController" customModule="diary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p65-Pi-gRD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -325,6 +327,7 @@
                         <outlet property="img" destination="8MV-py-TvS" id="1Yr-2y-liN"/>
                         <outlet property="ingredients" destination="eZO-m6-hp5" id="6wF-FM-mYm"/>
                         <outlet property="name" destination="cfb-QF-iu2" id="pCx-KP-G3c"/>
+                        <outlet property="navBar" destination="wNc-kM-d1Z" id="DkV-Rc-M9z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ako-CV-uDB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -415,7 +418,7 @@
         <!--Add Meal-->
         <scene sceneID="Rdj-cK-Tcu">
             <objects>
-                <tableViewController id="8EC-fS-xHw" customClass="AddMealViewController" customModule="diary" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="8EC-fS-xHw" customClass="AddFoodViewController" customModule="diary" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Qmm-WG-vFR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -511,105 +514,23 @@
                     <navigationItem key="navigationItem" title="Add Meal" id="LmL-CP-C7N">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="YVg-6a-zUC">
                             <connections>
-                                <action selector="btnDoneClicked:" destination="8EC-fS-xHw" id="2qs-d8-aZF"/>
+                                <action selector="btnDoneClicked:" destination="8EC-fS-xHw" id="dZC-mG-t6K"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="btnDone" destination="YVg-6a-zUC" id="1VW-wj-2TQ"/>
+                        <outlet property="btnDone" destination="YVg-6a-zUC" id="5na-vU-OnR"/>
+                        <outlet property="navBar" destination="LmL-CP-C7N" id="Ayj-E6-2Od"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j9V-56-6BA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3372" y="-1580.0599700149926"/>
         </scene>
-        <!--Meals-->
-        <scene sceneID="7tG-at-W66">
-            <objects>
-                <tableViewController title="Meals" id="lGr-Zf-7iK" customClass="DrinksViewController" customModule="diary" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="3LH-kd-dng" customClass="Drin">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="uCI-d8-BTa">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <items>
-                                <navigationItem title="Drinks" id="vrU-SE-dvX">
-                                    <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="Aq8-QL-9hT">
-                                        <connections>
-                                            <segue destination="v6H-PW-Izb" kind="show" id="u2t-Kb-eR1"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </navigationItem>
-                            </items>
-                        </navigationBar>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="1K5-br-Rz0" customClass="CustomCell" customModule="diary" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="375" height="70"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1K5-br-Rz0" id="bEK-BJ-L68">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="69.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="meal1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="TIc-MH-dZw">
-                                            <rect key="frame" x="5" y="-175.5" width="70" height="420.5"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="70" id="3D2-Zs-IG9"/>
-                                            </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="35"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
-                                            </userDefinedRuntimeAttributes>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pwD-Ps-HVB">
-                                            <rect key="frame" x="85" y="5" width="75" height="32.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xwF-3J-CgL">
-                                            <rect key="frame" x="83" y="39" width="100" height="20"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="TIc-MH-dZw" firstAttribute="leading" secondItem="bEK-BJ-L68" secondAttribute="leading" constant="5" id="1qn-EH-k3o"/>
-                                        <constraint firstItem="xwF-3J-CgL" firstAttribute="leading" secondItem="TIc-MH-dZw" secondAttribute="trailing" constant="10" id="JDN-rF-BB7"/>
-                                        <constraint firstItem="TIc-MH-dZw" firstAttribute="centerY" secondItem="bEK-BJ-L68" secondAttribute="centerY" id="WVg-PV-jWc"/>
-                                        <constraint firstItem="pwD-Ps-HVB" firstAttribute="leading" secondItem="TIc-MH-dZw" secondAttribute="trailing" constant="10" id="gsV-xE-9Ty"/>
-                                        <constraint firstItem="xwF-3J-CgL" firstAttribute="top" secondItem="pwD-Ps-HVB" secondAttribute="bottom" id="mmd-P9-hQY"/>
-                                        <constraint firstItem="pwD-Ps-HVB" firstAttribute="top" secondItem="bEK-BJ-L68" secondAttribute="top" constant="5" id="vOc-9e-D2T"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="img" destination="TIc-MH-dZw" id="wgF-Ab-sza"/>
-                                    <outlet property="ingredients" destination="xwF-3J-CgL" id="XZX-hI-DCf"/>
-                                    <outlet property="name" destination="pwD-Ps-HVB" id="pCO-xy-Jb4"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="lGr-Zf-7iK" id="U46-TU-XCx"/>
-                            <outlet property="delegate" destination="lGr-Zf-7iK" id="bzL-29-oaj"/>
-                        </connections>
-                    </tableView>
-                    <tabBarItem key="tabBarItem" title="Drinks" image="barDrink.png" id="nED-Mo-P8e"/>
-                    <navigationItem key="navigationItem" title="Drinks" id="jex-nS-et9"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="brq-Ga-86Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2350" y="1609"/>
-        </scene>
         <!--Add Drink-->
         <scene sceneID="vH0-hd-BBV">
             <objects>
-                <viewController id="v6H-PW-Izb" customClass="CreateDrinkViewController" customModule="diary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="v6H-PW-Izb" customClass="CreateFoodViewController" customModule="diary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Su-VX-X98">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -681,6 +602,7 @@
                         <outlet property="img" destination="zxL-aL-xiR" id="Gcb-SJ-EIH"/>
                         <outlet property="ingredients" destination="mxo-4P-2L2" id="pyv-Pi-Vsu"/>
                         <outlet property="name" destination="YzO-43-9Ie" id="9Mh-RG-7Hi"/>
+                        <outlet property="navBar" destination="NyP-yt-mgr" id="95C-kM-uRm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ava-In-KsX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -690,7 +612,7 @@
         <!--Add Drink-->
         <scene sceneID="9FA-vO-s4h">
             <objects>
-                <tableViewController id="SsX-Yg-Ydu" customClass="AddDrinkViewController" customModule="diary" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="SsX-Yg-Ydu" customClass="AddFoodViewController" customModule="diary" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="XKe-cb-rzD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -786,17 +708,103 @@
                     <navigationItem key="navigationItem" title="Add Drink" id="TDr-Ku-chJ">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="SXY-yh-Him">
                             <connections>
-                                <action selector="btnDoneClicked:" destination="SsX-Yg-Ydu" id="n2F-Qy-Vev"/>
+                                <action selector="btnDoneClicked:" destination="SsX-Yg-Ydu" id="Np7-WQ-hID"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="btnDone" destination="SXY-yh-Him" id="Cbw-KA-f3W"/>
+                        <outlet property="btnDone" destination="SXY-yh-Him" id="YWy-i6-FF1"/>
+                        <outlet property="navBar" destination="TDr-Ku-chJ" id="hvX-UE-6WK"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kuX-6u-npu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3372" y="-860"/>
+        </scene>
+        <!--Drinks-->
+        <scene sceneID="bpC-Ep-Ekv">
+            <objects>
+                <tableViewController title="Drinks" id="wGA-vZ-bkf" customClass="FoodsViewController" customModule="diary" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="02T-j3-zq9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="3Rz-YQ-DJZ">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <navigationItem title="Drinks" id="g73-7B-CY3">
+                                    <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="dif-nk-Aeq">
+                                        <connections>
+                                            <segue destination="v6H-PW-Izb" kind="show" id="xCV-YR-F7H"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="SUE-1p-TCM" customClass="CustomCell" customModule="diary" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="375" height="70"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SUE-1p-TCM" id="v8o-gr-PR5">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="69.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="meal1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="BVm-1H-E9f">
+                                            <rect key="frame" x="5" y="-175.5" width="70" height="420.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="70" id="fbx-26-cqe"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="35"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XV5-1M-fku">
+                                            <rect key="frame" x="85" y="5" width="75" height="32.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yrV-gJ-1dU">
+                                            <rect key="frame" x="83" y="39" width="100" height="20"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="yrV-gJ-1dU" firstAttribute="top" secondItem="XV5-1M-fku" secondAttribute="bottom" id="6TL-iR-CCv"/>
+                                        <constraint firstItem="yrV-gJ-1dU" firstAttribute="leading" secondItem="BVm-1H-E9f" secondAttribute="trailing" constant="10" id="AO2-F8-HOf"/>
+                                        <constraint firstItem="XV5-1M-fku" firstAttribute="leading" secondItem="BVm-1H-E9f" secondAttribute="trailing" constant="10" id="IEA-At-ZRS"/>
+                                        <constraint firstItem="XV5-1M-fku" firstAttribute="top" secondItem="v8o-gr-PR5" secondAttribute="top" constant="5" id="JVY-pY-AHn"/>
+                                        <constraint firstItem="BVm-1H-E9f" firstAttribute="centerY" secondItem="v8o-gr-PR5" secondAttribute="centerY" id="PF8-GF-2SO"/>
+                                        <constraint firstItem="BVm-1H-E9f" firstAttribute="leading" secondItem="v8o-gr-PR5" secondAttribute="leading" constant="5" id="QYH-rB-bvI"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="img" destination="BVm-1H-E9f" id="kCY-8t-jYK"/>
+                                    <outlet property="ingredients" destination="yrV-gJ-1dU" id="2lb-On-SMj"/>
+                                    <outlet property="name" destination="XV5-1M-fku" id="9Sh-Mf-iwZ"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="wGA-vZ-bkf" id="DaQ-bA-Bv1"/>
+                            <outlet property="delegate" destination="wGA-vZ-bkf" id="laT-D1-GMV"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Meals" image="barDrink.png" id="qXa-YY-eH8"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="navBar" destination="g73-7B-CY3" id="UIf-1F-oTL"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="biY-gb-1Ga" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2350" y="1609"/>
         </scene>
     </scenes>
     <resources>

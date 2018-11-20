@@ -12,7 +12,6 @@ import CoreData
 class FoodManager {
     
     var populated = false
-
     
     private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     private var frc: NSFetchedResultsController<NSFetchRequestResult>!
@@ -50,14 +49,7 @@ class FoodManager {
 
     
     func fetchFood(byIndex id: Int, type: String) -> NSManagedObject {
-        var foundedFood = NSManagedObject()
-        for food in fetchFood(type: type) {
-            if food.value(forKey: "id") as! Int == id {
-                foundedFood = food
-                break
-            }
-        }
-        return foundedFood
+        return fetchFood(type: type)[id]
     }
 
     func fetchFood(byId id: Int, type: String) -> NSManagedObject {
@@ -77,11 +69,6 @@ class FoodManager {
     }
     
     func addFood(id: Int32, name: String, ingredients: String, image: NSData , type: String){
-        
-        print("NEW ITEM ADDING ####")
-        print("id \(id)")
-        print("name \(name)")
-        print("ingredients \(ingredients)")
         
         let entity = NSEntityDescription.entity(forEntityName: "\(type)", in: context!)
         let storedItem = NSManagedObject(entity: entity!, insertInto: context)
@@ -139,31 +126,42 @@ class FoodManager {
         saveContext()
     }
     
+    func FoodConsumedCount(type: String) -> Int {
+        let request = NSFetchRequest<NSManagedObject>(entityName: type)
+        do {
+            return (try (context?.fetch(request))?.count)!
+        } catch {
+            print("Error fetching data: \(type)")
+        }
+        return 0
+    }
     
-    func addFoodToDate(date: String, foodType: String, foodId: Int, quantity: Int){
+    
+    func addFoodToDate(date: String, foodType: String, foodId: Int, quantity: String){
+        
+        let entityName = (foodType == "Meals") ? "MealConsumed" : "DrinkConsumed"
         
         let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Days")
         fetchReq.predicate = NSPredicate(format: "date = %@", date)
         
-        let foodEntity = NSEntityDescription.entity(forEntityName: foodType, in: context!)
+        let foodEntity = NSEntityDescription.entity(forEntityName: entityName, in: context!)
         let food = NSManagedObject(entity: foodEntity!, insertInto: context)
         
+        food.setValue(FoodConsumedCount(type: entityName), forKey: "selfId")
         food.setValue(foodId, forKey: "id")
         food.setValue(quantity, forKey: "quantity")
         
         if let fetchResults = try? context?.fetch(fetchReq) as? [NSManagedObject] {
             let day = fetchResults![0]
-            let key = (foodType == "MealConsumed") ? "meals" : "drinks"
+            let key = (foodType == "Meals") ? "meals" : "drinks"
             day.mutableSetValue(forKey: key).add(food)
         }
         saveContext()
     }
     
     func deleteFoodFromDate(date: String, type: String, foodId: Int){
-        
-        let typeFood = (type == "MealConsumed") ? "Meals" : "Drinks"
-        let food = fetchFood(byId: foodId, type: typeFood)
-        context?.delete(food)
+        let food = fetchConsumed(byId: foodId, type: type, date: date)
+        context?.delete(food!)
         saveContext()
     }
 
@@ -185,6 +183,26 @@ class FoodManager {
         saveContext()
     }
     
+    func fetchConsumed(byId id: Int, type: String, date: String) -> NSManagedObject? {
+        
+        let day = findDay(byDate: date)
+        let key = (type == "DrinkConsumed") ? "drinks" : "meals"
+        let days = day.mutableSetValue(forKey: key).allObjects
+        
+        for day in (days as! [NSManagedObject]) {
+            if (day.value(forKey: "selfId") as! Int32) == id {
+                return day
+            }
+        }
+        return nil
+    }
+    
+    func fetchConsumed(byIndex id: Int, type: String, date: String) -> NSManagedObject{
+        let day = findDay(byDate: date)
+        let key = (type == "DrinkConsumed") ? "drinks" : "meals"
+        let consumed = day.mutableSetValue(forKey: key).allObjects[id]
+        return consumed as! NSManagedObject
+    }
     
     // HELPERS @@@@
     func saveContext(){

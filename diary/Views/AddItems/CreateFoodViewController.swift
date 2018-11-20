@@ -8,10 +8,11 @@
 
 import UIKit
 
-class CreateDrinkViewController: UIViewController {
+class CreateFoodViewController: UIViewController {
     
     
-
+    @IBOutlet weak var navBar: UINavigationItem!
+    
     @IBOutlet weak var ingredients: UITextView!
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var name: UITextField!
@@ -21,16 +22,22 @@ class CreateDrinkViewController: UIViewController {
     var imagePicked = false
     
     // vm - ViewModel
-    var vm: CreateDrinkViewModel?
+    var vm: CreateFoodViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        vm = (navigationController?.viewControllers[0] as! TabBarController).viewModels.createDrink
+        vm = (navigationController?.viewControllers[0] as! TabBarController).viewModels.createFood
         
+        setVMType()
         configPlaceholder()
         configImgPicker()
         createImgTapRecognizer()
+    }
+    
+    func setVMType(){
+        let type = (navBar.title == "Add Drink") ? "Drinks" : "Meals"
+        vm?.type = type
     }
     
     
@@ -48,7 +55,7 @@ class CreateDrinkViewController: UIViewController {
 
 
 // MARK: - CREATE VIEW
-extension CreateDrinkViewController: UITextViewDelegate {
+extension CreateFoodViewController: UITextViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
@@ -76,7 +83,7 @@ extension CreateDrinkViewController: UITextViewDelegate {
 
 
 // MARK: - IMAGE PICKER CONTROLLER
-extension CreateDrinkViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+extension CreateFoodViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     func configImgPicker(){
         imgPicker.delegate = self
@@ -85,14 +92,13 @@ extension CreateDrinkViewController: UINavigationControllerDelegate, UIImagePick
     }
     
     func createImgTapRecognizer(){
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CreateMealViewController.imageTapped(gesture:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CreateFoodViewController.imageTapped(gesture:)))
         img.addGestureRecognizer(tapGesture)
         img.isUserInteractionEnabled = true
     }
     
     @objc func imageTapped(gesture: UIGestureRecognizer) {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
-            print("Button capture")
             self.present(imgPicker, animated: true, completion: nil)
         }
     }
