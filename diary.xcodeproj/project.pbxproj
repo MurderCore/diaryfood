@@ -42,6 +42,18 @@
 		57D54AD621A43420000E3A24 /* FoodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D54AD521A4341F000E3A24 /* FoodsViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		57577CFB21A58C1100D77F3C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		5709A371219C6D610026B185 /* HistoryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		5709A372219C6D610026B185 /* RootViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
@@ -239,6 +251,7 @@
 				57693A9321998BA700B216B0 /* Sources */,
 				57693A9421998BA700B216B0 /* Frameworks */,
 				57693A9521998BA700B216B0 /* Resources */,
+				57577CFB21A58C1100D77F3C /* CopyFiles */,
 			);
 			buildRules = (
 			);

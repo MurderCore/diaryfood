@@ -85,6 +85,7 @@ class FoodManager {
         let food = fetchFood(byId: id, type: type)
         context?.delete(food)
         saveContext()
+        deleteFoodFromHistory(id: id, foodType: type)
     }
     
     
@@ -214,6 +215,34 @@ class FoodManager {
         let consumed = day.mutableSetValue(forKey: key).allObjects[id]
         return consumed as! NSManagedObject
     }
+    
+    func deleteFoodFromHistory(id: Int, foodType: String){
+        
+        var obj: [NSManagedObject]?
+        let type = (foodType == "Meals") ? "MealConsumed" : "DrinkConsumed"
+        
+        // fetch all FoodConsumed with given ID
+        do {
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: type)
+            fetchRequest.predicate = NSPredicate(format: "id == %d", id)
+            obj = try context?.fetch(fetchRequest) as! [NSManagedObject]
+        }
+        catch {
+            print ("fetch task failed", error)
+        }
+        
+        // Delete all FoodConsumed from context
+        for food in obj! {
+            context?.delete(food)
+        }
+        saveContext()
+        
+        // Delete all empty days
+        for day in fetchHistory() {
+            checkIfFoodLeft(atDate: day.value(forKey: "date") as! String)
+        }
+    }
+    
     
     // HELPERS @@@@
     func saveContext(){

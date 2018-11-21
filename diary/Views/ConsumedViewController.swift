@@ -11,8 +11,10 @@ import UIKit
 class ConsumedViewController: UITableViewController {
 
     @IBOutlet weak var barTitle: UINavigationItem!
-    
     var vm: ConsumedViewModel?
+    
+    var drinksCount = 0
+    var mealsCount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,15 +28,30 @@ class ConsumedViewController: UITableViewController {
 extension ConsumedViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return (section == 0) ? "Meals" : "Drinks"
+        if section == 0 {
+            if mealsCount == 0 {
+                return nil
+            }
+            return "Meals"
+        } else {
+            if drinksCount == 0 {
+                return nil
+            }
+            return "Drinks"
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
+        drinksCount = (vm?.getRowsNumb(forSection: 1, date: barTitle.title!))!
+        mealsCount = (vm?.getRowsNumb(forSection: 0, date: barTitle.title!))!
         return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (vm?.getRowsNumb(forSection: section, date: barTitle.title!))!
+        if section == 0 {
+            return mealsCount
+        }
+        return drinksCount
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
