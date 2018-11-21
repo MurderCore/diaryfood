@@ -43,6 +43,8 @@ class CreateFoodViewController: UIViewController {
     
     // MARK: - Button controllers
     @IBAction func btnAddClicked(_ sender: Any) {
+        img.image = resize(w: 60, image: img.image!)
+        print("picked image width and height is: \(img.image?.size.width) x \(img.image?.size.height)")
         if !(vm!.isFullDescribed(ingredients: ingredients, name: name, imgPicked: imagePicked)) {
             self.present((vm!.getMissingAlert()), animated: true, completion: nil)
             return
@@ -105,13 +107,26 @@ extension CreateFoodViewController: UINavigationControllerDelegate, UIImagePicke
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            img.image = image
+            img.image = resize(w: 150, image: image)
+            print("Now width is: \(img.image?.size.width)")
             img.clipsToBounds = true
         }
         dismiss(animated: true, completion: {() in
             self.imagePicked = true
             
         })
+    }
+    
+    func resize(w: Int, image: UIImage) -> UIImage {
+        let scaleFactor = CGFloat(w) / image.size.width
+        let newWidth = (image.size.width) * scaleFactor
+        
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newWidth))
+        image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newWidth))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
     }
 }
 
