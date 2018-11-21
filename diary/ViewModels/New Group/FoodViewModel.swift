@@ -1,4 +1,4 @@
-//
+﻿//
 //  MealsViewModel.swift
 //  diary
 //
@@ -11,6 +11,8 @@ import UIKit
 
 class FoodViewModel {
     
+	var food: [NSManagedObject]?
+
     var db: FoodManager?
     var type: String?
     
@@ -22,7 +24,20 @@ class FoodViewModel {
         return Int((db?.fetchCount(type: type!))!)
     }
     
-    func getCell(byIndex id: Int, cell: CustomCell) -> CustomCell {
+	func getCell(byIndex id: Int, cell: CustomCell) -> CustomCell {
+       		let preset = cell
+        	let meal = food[id]
+        	let id = meal.value(forKey: "id") as! Int32
+        
+        	preset.img.image = UIImage(data: (meal?.value(forKey: "image") as! Data))
+        	preset.ingredients.text = meal?.value(forKey: "ingredients") as! String
+        	preset.name.text = meal?.value(forKey: "name") as! String
+        	preset.restorationIdentifier = String(id)
+        
+        	return preset
+    	}
+
+    /*func getCell(byIndex id: Int, cell: CustomCell) -> CustomCell {
         let preset = cell
         let fetchedMeal = db?.fetchFood(byIndex: id, type: type!)
         let id = fetchedMeal?.value(forKey: "id") as! Int32
@@ -33,7 +48,11 @@ class FoodViewModel {
         preset.restorationIdentifier = String(id)
         
         return preset
-    }
+    }*/
+
+	func updateFood(){
+		food = db?.fetchFood(type: type!)
+	}
     
     func remove(atId id: Int){
         db?.removeFood(byId: id, type: type!)
