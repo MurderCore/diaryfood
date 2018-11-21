@@ -1,4 +1,4 @@
-//
+﻿//
 //  FoodManager.swift
 //  diary
 //
@@ -192,6 +192,7 @@ class FoodManager {
     }
     
     func deleteHistory(date: String){
+	if !existDay(date: date) return
         let day = findDay(byDate: date)
         context?.delete(day)
         saveContext()
@@ -212,6 +213,7 @@ class FoodManager {
     }
     
     func getConsumed(date: String, type: String) -> [NSManagedObject]? {
+	if !existDay(date: date) return nil
         let day = findDay(byDate: date)
         return day.mutableSetValue(forKey: type).allObjects as! [NSManagedObject]
     }

@@ -1,4 +1,4 @@
-//
+﻿//
 //  ConsumedViewModel.swift
 //  diary
 //
@@ -26,35 +26,26 @@ class ConsumedViewModel {
         }
         return (consumedDrink?.count)!
     }
+
+
+	func getCell(date: String, byIndex id: Int, cell: CustomCell, section: Int) -> {
+		let preset = cell
+		var consumed = (section == 0) ? consumedMeal[id] : consumedDrink[id]
+
+		let foodId = consumed.value(forKey: "id") as! Int32
+		let type = (section == 0) ? "Meals" : "Drinks"
+
+		let meal = db?.fetchFood(byId: foodId, type: type)
+
+		preset.img.image = UIImage(data: (meal?.value(forKey: "image") as! Data))
+       		preset.ingredients.text = "\(consumed?.value(forKey: "quantity") as! String)g"
+        	preset.name.text = meal?.value(forKey: "name") as! String
+        	preset.restorationIdentifier = consumed.value(forKey: "id") as! String
+
+		return preset
+	}
     
-    func getCell(date: String, byIndex id: Int, cell: CustomCell, section: Int) -> CustomCell {
-        
-        let type = (section == 0) ? "Meals" : "Drinks"
-        let typeConsumed = (type == "Drinks") ? "DrinkConsumed" : "MealConsumed"
-        
-        let preset = cell
-        let fetchedConsumed = db?.fetchConsumed(byIndex: id, type: typeConsumed, date: date)
-        let foodId = (fetchedConsumed?.value(forKey: "id") as! Int32)
-        print("Consumed food id \(foodId)")
-        let fetchedMeal = db?.fetchFood(byId: Int(foodId), type: type)
-        let id = fetchedConsumed?.value(forKey: "selfId") as! Int32
-
-        preset.img.image = UIImage(data: (fetchedMeal?.value(forKey: "image") as! Data))
-        preset.ingredients.text = "Food id: \(foodId)" //"\(fetchedConsumed?.value(forKey: "quantity") as! String)g"
-        preset.name.text = fetchedMeal?.value(forKey: "name") as! String
-        preset.restorationIdentifier = String(id)
-        
-        return preset
-    }
-
-    func existFoodAtDate(date: String) -> Bool {
-        if consumedDrink?.count == 0 &&
-            consumedMeal?.count == 0 {
-            db?.deleteHistory(date: date)
-            return false
-        }
-        return true
-    }
+// CALL ONLY checkIfFoodLeft to remove a day
     
     func deleteFoodFromDate(date: String, type: String, id: String){
         db?.deleteFoodFromDate(date: date, type: type, foodId: Int(id)!)
