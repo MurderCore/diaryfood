@@ -106,9 +106,11 @@ extension CreateFoodViewController: UINavigationControllerDelegate, UIImagePicke
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             img.image = image
+            img.clipsToBounds = true
         }
         dismiss(animated: true, completion: {() in
             self.imagePicked = true
+            
         })
     }
 }
@@ -117,6 +119,7 @@ class CustomCell: UITableViewCell {
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var ingredients: UILabel!
+
 }
 
 

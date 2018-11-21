@@ -16,5 +16,4 @@ class RootViewModel {
         let time : String = formatter.string(from:   NSDate.init(timeIntervalSinceNow: 0) as Date)
         return time
     }
-    
 }
