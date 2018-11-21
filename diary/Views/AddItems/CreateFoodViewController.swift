@@ -43,8 +43,7 @@ class CreateFoodViewController: UIViewController {
     
     // MARK: - Button controllers
     @IBAction func btnAddClicked(_ sender: Any) {
-        img.image = resize(w: 60, image: img.image!)
-        print("picked image width and height is: \(img.image?.size.width) x \(img.image?.size.height)")
+        img.image = resize(To: 60, image: img.image!)
         if !(vm!.isFullDescribed(ingredients: ingredients, name: name, imgPicked: imagePicked)) {
             self.present((vm!.getMissingAlert()), animated: true, completion: nil)
             return
@@ -90,7 +89,7 @@ extension CreateFoodViewController: UINavigationControllerDelegate, UIImagePicke
     func configImgPicker(){
         imgPicker.delegate = self
         imgPicker.sourceType = .photoLibrary;
-        imgPicker.allowsEditing = false
+        imgPicker.allowsEditing = true
     }
     
     func createImgTapRecognizer(){
@@ -107,8 +106,7 @@ extension CreateFoodViewController: UINavigationControllerDelegate, UIImagePicke
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            img.image = resize(w: 150, image: image)
-            print("Now width is: \(img.image?.size.width)")
+            img.image = resize(To: 300, image: image)
             img.clipsToBounds = true
         }
         dismiss(animated: true, completion: {() in
@@ -117,12 +115,16 @@ extension CreateFoodViewController: UINavigationControllerDelegate, UIImagePicke
         })
     }
     
-    func resize(w: Int, image: UIImage) -> UIImage {
-        let scaleFactor = CGFloat(w) / image.size.width
-        let newWidth = (image.size.width) * scaleFactor
+    func resize(To size: Int, image: UIImage) -> UIImage {
         
-        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newWidth))
-        image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newWidth))
+        let lessSize = (image.size.width < image.size.height) ? image.size.width : image.size.height
+        
+        let scaleCoeff = CGFloat(size) / lessSize
+        let newWidth = (image.size.width) * scaleCoeff
+        let newHeight = (image.size.height) * scaleCoeff
+        
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+        image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
         
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

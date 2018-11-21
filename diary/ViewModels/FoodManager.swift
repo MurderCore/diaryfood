@@ -52,15 +52,14 @@ class FoodManager {
         return fetchFood(type: type)[id]
     }
 
-    func fetchFood(byId id: Int, type: String) -> NSManagedObject {
-        var obj = NSManagedObject()
+    func fetchFood(byId id: Int, type: String) -> NSManagedObject? {
         for food in fetchFood(type: type){
             if food.value(forKey: "id") as! Int32 == id {
-                obj = food
-                break
+                print("IN DB FOOD \(food.value(forKey: "Name")) has id \(food.value(forKey: "id")) ")
+                return food
             }
         }
-        return obj
+        return nil
     }
     
     
@@ -69,6 +68,8 @@ class FoodManager {
     }
     
     func addFood(id: Int32, name: String, ingredients: String, image: NSData , type: String){
+        
+        print("Created food with id \(id)")
         
         let entity = NSEntityDescription.entity(forEntityName: "\(type)", in: context!)
         let storedItem = NSManagedObject(entity: entity!, insertInto: context)
@@ -83,7 +84,7 @@ class FoodManager {
     
     func removeFood(byId id: Int, type: String){
         let food = fetchFood(byId: id, type: type)
-        context?.delete(food)
+        context?.delete(food!)
         saveContext()
         deleteFoodFromHistory(id: id, foodType: type)
     }
@@ -140,6 +141,8 @@ class FoodManager {
     
     func addFoodToDate(date: String, foodType: String, foodId: Int, quantity: String){
         
+        print("Added ID \(foodId) to date")
+        
         let entityName = (foodType == "Meals") ? "MealConsumed" : "DrinkConsumed"
         
         let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Days")
@@ -159,17 +162,16 @@ class FoodManager {
         }
         saveContext()
     }
-    
     func deleteFoodFromDate(date: String, type: String, foodId: Int){
         let food = fetchConsumed(byId: foodId, type: type, date: date)
         context?.delete(food!)
         saveContext()
+        checkIfFoodLeft(atDate: date)
     }
     
+    
     func checkIfFoodLeft(atDate date: String) -> Bool {
-        print("Trying to find day")
         let day = findDay(byDate: date)
-        print("Day founded!")
         if day.mutableSetValue(forKey: "drinks").allObjects.count == 0
             && day.mutableSetValue(forKey: "meals").allObjects.count == 0 {
             deleteHistory(date: date)
@@ -207,6 +209,11 @@ class FoodManager {
             }
         }
         return nil
+    }
+    
+    func getConsumed(date: String, type: String) -> [NSManagedObject]? {
+        let day = findDay(byDate: date)
+        return day.mutableSetValue(forKey: type).allObjects as! [NSManagedObject]
     }
     
     func fetchConsumed(byIndex id: Int, type: String, date: String) -> NSManagedObject{

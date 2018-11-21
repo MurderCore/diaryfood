@@ -62,6 +62,8 @@ extension ConsumedViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        vm?.updateFoods(date: barTitle.title!)
+        tableView.tableFooterView = UIView()
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -76,6 +78,7 @@ extension ConsumedViewController {
             tableView.reloadData()
             
             if !(vm?.existFoodAtDate(date: date))! {
+                print("Food not exist anymore")
                 navigationController?.popViewController(animated: true)
             }
         }

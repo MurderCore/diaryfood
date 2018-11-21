@@ -31,6 +31,9 @@ extension FoodsViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = (tableView.dequeueReusableCell(withIdentifier: "cell") as? CustomCell)
         cell = vm?.getCell(byIndex: indexPath.row, cell: cell!)
+        
+        print("!!!! cell named \(cell?.name.text) has id: \(cell?.restorationIdentifier)")
+        
         return cell!
     }
     
@@ -38,6 +41,7 @@ extension FoodsViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         vm?.type = navBar.title
         tableView.reloadData()
+        tableView.tableFooterView = UIView()
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

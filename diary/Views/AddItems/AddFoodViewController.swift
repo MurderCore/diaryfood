@@ -38,6 +38,9 @@ class AddFoodViewController: UITableViewController {
         if (q == "") {
             self.present((vm?.getAlert(message: "Missing quantity"))!, animated: true, completion: nil)
             return
+        } else if Int(q)! < 1 || q.count > 5 {
+            self.present((vm?.getAlert(message: "Incorrect quantity"))!, animated: true, completion: nil)
+            return
         }
         vm?.addConsumedMeal(id: Int(id!)!, quantity: Int((infoCell?.info.text!)!)!)
         navigationController?.popViewController(animated: true)
@@ -75,6 +78,7 @@ extension AddFoodViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        tableView.tableFooterView = UIView()
     }
 }
 
