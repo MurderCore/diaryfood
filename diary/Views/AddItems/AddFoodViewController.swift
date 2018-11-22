@@ -58,6 +58,7 @@ extension AddFoodViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         btnDone.isEnabled = true
         if indexPath.row == 0 {
+            infoCell?.info.becomeFirstResponder()
             return
         }
         tableView.cellForRow(at: IndexPath(row: lastSelected, section: 0))?.accessoryType = UITableViewCellAccessoryType.none
