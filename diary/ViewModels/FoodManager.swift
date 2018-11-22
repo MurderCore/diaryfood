@@ -55,7 +55,6 @@ class FoodManager {
     }
     
     func addFood(id: Int32, name: String, ingredients: String, image: NSData , type: String){
-
         let entity = NSEntityDescription.entity(forEntityName: "\(type)", in: context!)
         let storedItem = NSManagedObject(entity: entity!, insertInto: context)
         
@@ -200,7 +199,6 @@ class FoodManager {
     }
     
     func deleteFoodFromHistory(id: Int, foodType: String){
-        print("\(foodType) with id \(id) is removing from history")
         var obj: [NSManagedObject]?
         let type = (foodType == "Meals") ? "MealConsumed" : "DrinkConsumed"
         
@@ -214,7 +212,6 @@ class FoodManager {
         saveContext()
         
         for day in fetchHistory() {
-            print("Check if \(day.value(forKey: "date")) has left food ")
            let _ = checkIfFoodLeft(atDate: day.value(forKey: "date") as! String)
         }
     }
@@ -276,9 +273,10 @@ class FoodManager {
     
     func populateDataBase(){
         
-        func populateFood(type: String, myDict: NSDictionary) {
-            for i in 1...(myDict["\(type)Count"] as! Int) {
-                
+        func populateFood(type: String, myDict: NSDictionary, elements: Int) {
+            
+            for i in 1...elements
+            {
                 var imgData: NSData?
                 let path = ((myDict["\(type)\(i)"] as! NSDictionary)["image"]) as! String
                 if let filePath = Bundle.main.path(forResource: path, ofType: ""), let image = UIImage(contentsOfFile: filePath) {
@@ -295,8 +293,14 @@ class FoodManager {
         if let path = Bundle.main.path(forResource: "Food", ofType: "plist"),
             let myDict = NSDictionary(contentsOfFile: path)
         {
-            populateFood(type: "Meal", myDict: myDict)
-            populateFood(type: "Drink", myDict: myDict)
+            let drinksCount = (myDict["DrinkCount"] as! Int)
+            let mealsCount = (myDict["MealCount"] as! Int)
+            
+            UserDefaults.standard.set(mealsCount, forKey: "plistMeals")
+            UserDefaults.standard.set(drinksCount, forKey: "plistDrinks")
+            
+            populateFood(type: "Meal", myDict: myDict, elements: mealsCount)
+            populateFood(type: "Drink", myDict: myDict, elements: drinksCount)
         }
     }
 }

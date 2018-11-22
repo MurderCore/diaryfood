@@ -44,9 +44,15 @@ class CreateFoodViewModel {
     
     
     func addMeal(ingredients: String, name: String, img: UIImageView){
-        let count = (db?.fetchCount(type: type!))!
+        
+        let key = (type! == "Drinks") ? "plistDrinks" : "plistMeals"
         let imgData: NSData = UIImagePNGRepresentation(img.image!)! as NSData
-        db?.addFood(id: Int32(count), name: name, ingredients: ingredients, image: imgData, type: type!)
+        var id = UserDefaults.standard.integer(forKey: key)
+        
+        db?.addFood(id: Int32(id), name: name, ingredients: ingredients, image: imgData, type: type!)
+        
+        id += 1;
+        UserDefaults.standard.set(id, forKey: key)
     }
     
     func resize(To size: Int, image: UIImage) -> UIImage {
