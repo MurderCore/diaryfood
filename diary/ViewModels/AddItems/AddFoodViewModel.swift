@@ -33,4 +33,13 @@ class AddFoodViewModel {
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
         return alert
     }
+    
+    func isCorrectNumber(q: String) -> Bool {
+        if Int(q) == nil {
+            return false
+        } else if Int(q)! < 1 || q.count > 5 {
+            return false
+        }
+        return true
+    }
 }

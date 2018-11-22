@@ -33,17 +33,14 @@ class AddFoodViewController: UITableViewController {
     
     // MARK: - Button controller
     @IBAction func btnDoneClicked(_ sender: Any) {
-        
+    
         let q = (infoCell?.info.text)!
-        if (q == "") {
-            self.present((vm?.getAlert(message: "Missing quantity"))!, animated: true, completion: nil)
-            return
-        } else if Int(q)! < 1 || q.count > 5 {
+        if (vm?.isCorrectNumber(q: q))! {
+            vm?.addConsumedMeal(id: lastSelectedID, quantity: Int((infoCell?.info.text!)!)!)
+            navigationController?.popViewController(animated: true)
+        } else {
             self.present((vm?.getAlert(message: "Incorrect quantity"))!, animated: true, completion: nil)
-            return
         }
-        vm?.addConsumedMeal(id: lastSelectedID, quantity: Int((infoCell?.info.text!)!)!)
-        navigationController?.popViewController(animated: true)
     }
 }
 
