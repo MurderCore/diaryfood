@@ -847,7 +847,7 @@
     </scenes>
     <resources>
         <image name="addImg.png" width="256" height="256"/>
-        <image name="barDrink.png" width="64" height="64"/>
+        <image name="barDrink.png" width="30" height="30"/>
         <image name="barHistory.png" width="30" height="30"/>
         <image name="barHome.png" width="30" height="30"/>
         <image name="barMeal.png" width="30" height="30"/>

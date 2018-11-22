@@ -72,9 +72,7 @@ extension ConsumedViewController {
             let id = tableView.cellForRow(at: indexPath)?.restorationIdentifier
             let date = barTitle.title!
             let type = (indexPath.section == 0) ? "MealConsumed" : "DrinkConsumed"
-            
-            print("Selected to delete consumed with id: \(id)")
-            
+                    
             vm?.deleteFoodFromDate(date: date, type: type, id: id!)
             
             if !(vm?.existFood(atDate: date))! {
