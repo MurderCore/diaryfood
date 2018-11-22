@@ -31,8 +31,8 @@ class FoodViewModel {
         	let id = meal.value(forKey: "id") as! Int32
         
         preset.img.image = UIImage(data: (meal.value(forKey: "image") as! Data))
-        preset.ingredients.text = meal.value(forKey: "ingredients") as! String
-        preset.name.text = meal.value(forKey: "name") as! String
+        preset.ingredients.text = meal.value(forKey: "ingredients") as? String
+        preset.name.text = meal.value(forKey: "name") as? String
         preset.restorationIdentifier = String(id)
         
         return preset
