@@ -32,12 +32,12 @@
 		57693AB621998CA700B216B0 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57693AB321998CA700B216B0 /* RootViewController.swift */; };
 		57693ABB21998FDE00B216B0 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57693ABA21998FDE00B216B0 /* HistoryViewController.swift */; };
 		57693ABE2199969E00B216B0 /* ViewModelsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57693ABD2199969E00B216B0 /* ViewModelsManager.swift */; };
-		57693AC42199A40C00B216B0 /* addImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 57693AC32199A40C00B216B0 /* addImg.png */; };
 		57693ACC2199B0BC00B216B0 /* ConsumedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57693ACB2199B0BC00B216B0 /* ConsumedViewController.swift */; };
 		57693ACE2199B39F00B216B0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57693ACD2199B39F00B216B0 /* TabBarController.swift */; };
 		57693AD02199B6CD00B216B0 /* Food.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57693ACF2199B6CD00B216B0 /* Food.plist */; };
 		57693AD32199BCDC00B216B0 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57693AD22199BCDC00B216B0 /* Models.swift */; };
 		57693AD52199BEB600B216B0 /* FoodManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57693AD42199BEB600B216B0 /* FoodManager.swift */; };
+		57AD2C1421A6BF8D009373E6 /* addImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 57AD2C1321A6BF8C009373E6 /* addImg.png */; };
 		57D54AD621A43420000E3A24 /* FoodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D54AD521A4341F000E3A24 /* FoodsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -81,12 +81,12 @@
 		57693AB321998CA700B216B0 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		57693ABA21998FDE00B216B0 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		57693ABD2199969E00B216B0 /* ViewModelsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelsManager.swift; sourceTree = "<group>"; };
-		57693AC32199A40C00B216B0 /* addImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addImg.png; sourceTree = "<group>"; };
 		57693ACB2199B0BC00B216B0 /* ConsumedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumedViewController.swift; sourceTree = "<group>"; };
 		57693ACD2199B39F00B216B0 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		57693ACF2199B6CD00B216B0 /* Food.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Food.plist; sourceTree = "<group>"; };
 		57693AD22199BCDC00B216B0 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		57693AD42199BEB600B216B0 /* FoodManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodManager.swift; sourceTree = "<group>"; };
+		57AD2C1321A6BF8C009373E6 /* addImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addImg.png; sourceTree = "<group>"; };
 		57D54AD521A4341F000E3A24 /* FoodsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FoodsViewController.swift; path = /Users/victor/Desktop/diaryfood/diary/Views/BarMenu/FoodsViewController.swift; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -171,7 +171,6 @@
 				57693AB021998C5D00B216B0 /* Images */,
 				57693A9E21998BA700B216B0 /* Main.storyboard */,
 				57693AA421998BA800B216B0 /* Assets.xcassets */,
-				57693AC32199A40C00B216B0 /* addImg.png */,
 				57693AA621998BA800B216B0 /* LaunchScreen.storyboard */,
 				57693AA921998BA800B216B0 /* Info.plist */,
 				57693ACF2199B6CD00B216B0 /* Food.plist */,
@@ -183,6 +182,7 @@
 		57693AB021998C5D00B216B0 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				57AD2C1321A6BF8C009373E6 /* addImg.png */,
 				575992E621A2F77E008C50ED /* DrinksAndMeals */,
 				5760A3E42199D5EB00521582 /* TabBar */,
 			);
@@ -303,8 +303,8 @@
 				575992EF21A2F82B008C50ED /* sprite.jpg in Resources */,
 				572071D72199DEA200ACAE52 /* barHistory.png in Resources */,
 				572071D82199DEA200ACAE52 /* barMeal.png in Resources */,
+				57AD2C1421A6BF8D009373E6 /* addImg.png in Resources */,
 				575992F021A2F82B008C50ED /* turkey.jpeg in Resources */,
-				57693AC42199A40C00B216B0 /* addImg.png in Resources */,
 				572071D62199DEA200ACAE52 /* barDrink.png in Resources */,
 				575992EE21A2F82B008C50ED /* cola.jpeg in Resources */,
 				57693AA821998BA800B216B0 /* LaunchScreen.storyboard in Resources */,
