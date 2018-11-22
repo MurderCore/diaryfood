@@ -14,6 +14,7 @@ class AddFoodViewController: UITableViewController {
     var foodVM: FoodViewModel?
     
     var lastSelected = 1
+    var lastSelectedID = 1
     
     var infoCell: InfoCell?
     @IBOutlet weak var btnDone: UIBarButtonItem!
@@ -32,7 +33,6 @@ class AddFoodViewController: UITableViewController {
     
     // MARK: - Button controller
     @IBAction func btnDoneClicked(_ sender: Any) {
-        let id = tableView.cellForRow(at: IndexPath(row: lastSelected, section: 0))?.restorationIdentifier
         
         let q = (infoCell?.info.text)!
         if (q == "") {
@@ -42,7 +42,7 @@ class AddFoodViewController: UITableViewController {
             self.present((vm?.getAlert(message: "Incorrect quantity"))!, animated: true, completion: nil)
             return
         }
-        vm?.addConsumedMeal(id: Int(id!)!, quantity: Int((infoCell?.info.text!)!)!)
+        vm?.addConsumedMeal(id: lastSelectedID, quantity: Int((infoCell?.info.text!)!)!)
         navigationController?.popViewController(animated: true)
     }
 }
@@ -64,6 +64,7 @@ extension AddFoodViewController {
         tableView.cellForRow(at: IndexPath(row: lastSelected, section: 0))?.accessoryType = UITableViewCellAccessoryType.none
         tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
         lastSelected = indexPath.row
+        lastSelectedID = Int((tableView.cellForRow(at: IndexPath(row: lastSelected, section: 0))?.restorationIdentifier)!)!
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
