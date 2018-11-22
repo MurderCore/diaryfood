@@ -25,7 +25,6 @@ class AddFoodViewModel {
         if !(db?.existDay(date: time))! {
             db?.addDate(date: time)
         }
-        print("Added to date food ID: \(id)")
         db?.addFoodToDate(date: time, foodType: type!, foodId: id, quantity: String(quantity))
     }
     

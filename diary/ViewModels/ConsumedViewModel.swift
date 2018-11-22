@@ -33,7 +33,6 @@ class ConsumedViewModel {
         let consumed = (section == 0) ? consumedMeal![id] : consumedDrink![id]
 
 		let foodId = consumed.value(forKey: "id") as! Int32
-        print("Consumed food id: \(foodId)")
 		let type = (section == 0) ? "Meals" : "Drinks"
 
         let meal = db?.fetchFood(byId: Int(foodId), type: type)

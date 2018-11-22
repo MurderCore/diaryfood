@@ -38,19 +38,6 @@ class FoodViewModel {
         return preset
     }
 
-    /*func getCell(byIndex id: Int, cell: CustomCell) -> CustomCell {
-        let preset = cell
-        let fetchedMeal = db?.fetchFood(byIndex: id, type: type!)
-        let id = fetchedMeal?.value(forKey: "id") as! Int32
-        
-        preset.img.image = UIImage(data: (fetchedMeal?.value(forKey: "image") as! Data))
-        preset.ingredients.text = fetchedMeal?.value(forKey: "ingredients") as! String
-        preset.name.text = fetchedMeal?.value(forKey: "name") as! String
-        preset.restorationIdentifier = String(id)
-        
-        return preset
-    }*/
-
 	func updateFood(){
 		food = db?.fetchFood(type: type!)
 	}

@@ -56,8 +56,6 @@ class FoodManager {
     
     func addFood(id: Int32, name: String, ingredients: String, image: NSData , type: String){
 
-        print("to DB added food with id: \(id)")
-        
         let entity = NSEntityDescription.entity(forEntityName: "\(type)", in: context!)
         let storedItem = NSManagedObject(entity: entity!, insertInto: context)
         
@@ -70,12 +68,11 @@ class FoodManager {
     }
     
     func removeFood(byId id: Int, type: String){
+        deleteFoodFromHistory(id: id, foodType: type)
         let food = fetchFood(byId: id, type: type)
         context?.delete(food!)
         saveContext()
-        deleteFoodFromHistory(id: id, foodType: type)
     }
-    
     
     
     // MARK: -  HISTORY METHODS ######
@@ -203,7 +200,7 @@ class FoodManager {
     }
     
     func deleteFoodFromHistory(id: Int, foodType: String){
-        
+        print("\(foodType) with id \(id) is removing from history")
         var obj: [NSManagedObject]?
         let type = (foodType == "Meals") ? "MealConsumed" : "DrinkConsumed"
         
@@ -217,6 +214,7 @@ class FoodManager {
         saveContext()
         
         for day in fetchHistory() {
+            print("Check if \(day.value(forKey: "date")) has left food ")
            let _ = checkIfFoodLeft(atDate: day.value(forKey: "date") as! String)
         }
     }
@@ -245,7 +243,7 @@ class FoodManager {
     
     func contextFetch(request: NSFetchRequest<NSFetchRequestResult>) -> [NSManagedObject]? {
         do {
-            return try context?.fetch(fetchRequest!) as? [NSManagedObject]
+            return try context?.fetch(request) as? [NSManagedObject]
         }
         catch {
             fatalError("Failed to load data from Database")

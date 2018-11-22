@@ -163,7 +163,6 @@
 			children = (
 				57693ACD2199B39F00B216B0 /* TabBarController.swift */,
 				57693A9A21998BA700B216B0 /* AppDelegate.swift */,
-				57693AD12199BCC900B216B0 /* Models */,
 				57693ABC2199968300B216B0 /* ViewModels */,
 				57693AB121998C7100B216B0 /* Views */,
 				57693AB021998C5D00B216B0 /* Images */,
@@ -226,13 +225,6 @@
 				57693AB221998CA700B216B0 /* AddFoodViewController.swift */,
 			);
 			path = AddItems;
-			sourceTree = "<group>";
-		};
-		57693AD12199BCC900B216B0 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

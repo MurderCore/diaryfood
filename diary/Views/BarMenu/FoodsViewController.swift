@@ -31,9 +31,6 @@ extension FoodsViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = (tableView.dequeueReusableCell(withIdentifier: "cell") as? CustomCell)
         cell = vm?.getCell(byIndex: indexPath.row, cell: cell!)
-        
-        print("!!!! cell named \(String(describing: cell?.name.text)) has id: \(String(describing: cell?.restorationIdentifier))")
-        
         return cell!
     }
     
