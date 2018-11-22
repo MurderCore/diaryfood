@@ -1,4 +1,4 @@
-﻿//
+//
 //  FoodManager.swift
 //  diary
 //
@@ -163,10 +163,10 @@ class FoodManager {
         saveContext()
     }
     func deleteFoodFromDate(date: String, type: String, foodId: Int){
+        print("Tring to delete food id: \(foodId)")
         let food = fetchConsumed(byId: foodId, type: type, date: date)
         context?.delete(food!)
         saveContext()
-        checkIfFoodLeft(atDate: date)
     }
     
     
@@ -192,19 +192,21 @@ class FoodManager {
     }
     
     func deleteHistory(date: String){
-	if !existDay(date: date) return
+        if !existDay(date: date) {
+            return
+        }
         let day = findDay(byDate: date)
         context?.delete(day)
         saveContext()
     }
     
     func fetchConsumed(byId id: Int, type: String, date: String) -> NSManagedObject? {
-        
         let day = findDay(byDate: date)
         let key = (type == "DrinkConsumed") ? "drinks" : "meals"
         let days = day.mutableSetValue(forKey: key).allObjects
         
         for day in (days as! [NSManagedObject]) {
+            print("In db exist \(type) with id \(day.value(forKey: "selfId"))")
             if (day.value(forKey: "selfId") as! Int32) == id {
                 return day
             }
@@ -213,7 +215,10 @@ class FoodManager {
     }
     
     func getConsumed(date: String, type: String) -> [NSManagedObject]? {
-	if !existDay(date: date) return nil
+        if !existDay(date: date) {
+            print("day with date \(date) not exist")
+            return nil
+        }
         let day = findDay(byDate: date)
         return day.mutableSetValue(forKey: type).allObjects as! [NSManagedObject]
     }
@@ -262,7 +267,7 @@ class FoodManager {
         }
     }
     
-    func findDay(byDate date: String) -> NSManagedObject{
+    func findDay(byDate date: String) -> NSManagedObject {
         let predicate = NSPredicate(format: "date == %@", date)
         frc.fetchRequest.predicate = predicate
         do {

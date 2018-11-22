@@ -287,6 +287,12 @@
                                     <constraint firstAttribute="height" constant="150" id="lUG-qS-MJ2"/>
                                     <constraint firstAttribute="width" constant="150" id="xVK-NV-qek"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cfb-QF-iu2">
                                 <rect key="frame" x="170" y="194" width="195" height="30"/>
@@ -577,6 +583,12 @@
                                     <constraint firstAttribute="width" constant="150" id="GoN-In-Vk7"/>
                                     <constraint firstAttribute="height" constant="150" id="ssL-6e-wF1"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YzO-43-9Ie">
                                 <rect key="frame" x="170" y="194" width="195" height="30"/>
@@ -835,7 +847,7 @@
     </scenes>
     <resources>
         <image name="addImg.png" width="256" height="256"/>
-        <image name="barDrink.png" width="30" height="30"/>
+        <image name="barDrink.png" width="64" height="64"/>
         <image name="barHistory.png" width="30" height="30"/>
         <image name="barHome.png" width="30" height="30"/>
         <image name="barMeal.png" width="30" height="30"/>

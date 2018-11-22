@@ -48,6 +48,22 @@ class CreateFoodViewModel {
         let imgData: NSData = UIImagePNGRepresentation(img.image!)! as NSData
         db?.addFood(id: Int32(count), name: name, ingredients: ingredients, image: imgData, type: type!)
     }
+    
+    func resize(To size: Int, image: UIImage) -> UIImage {
+        
+        let lessSize = (image.size.width < image.size.height) ? image.size.width : image.size.height
+        
+        let scaleCoeff = CGFloat(size) / lessSize
+        let newWidth = (image.size.width) * scaleCoeff
+        let newHeight = (image.size.height) * scaleCoeff
+        
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+        image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    }
 }
 
 

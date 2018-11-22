@@ -73,14 +73,18 @@ extension ConsumedViewController {
             let date = barTitle.title!
             let type = (indexPath.section == 0) ? "MealConsumed" : "DrinkConsumed"
             
-            vm?.deleteFoodFromDate(date: date, type: type, id: id!)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            tableView.reloadData()
+            print("Selected to delete consumed with id: \(id)")
             
-            if !(vm?.existFoodAtDate(date: date))! {
+            vm?.deleteFoodFromDate(date: date, type: type, id: id!)
+            
+            if !(vm?.existFood(atDate: date))! {
                 print("Food not exist anymore")
                 navigationController?.popViewController(animated: true)
             }
+            print("here 2")
+            
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.reloadData()
         }
     }
 }

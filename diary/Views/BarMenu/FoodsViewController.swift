@@ -1,4 +1,4 @@
-﻿//
+//
 //  MealsViewController.swift
 //  diary
 //
@@ -40,7 +40,7 @@ extension FoodsViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         vm?.type = navBar.title
-	vm?.updateFood()
+        vm?.updateFood()
         tableView.reloadData()
         tableView.tableFooterView = UIView()
     }

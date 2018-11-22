@@ -1,4 +1,4 @@
-﻿//
+//
 //  MealsViewModel.swift
 //  diary
 //
@@ -8,6 +8,7 @@
 
 
 import UIKit
+import CoreData
 
 class FoodViewModel {
     
@@ -25,17 +26,17 @@ class FoodViewModel {
     }
     
 	func getCell(byIndex id: Int, cell: CustomCell) -> CustomCell {
-       		let preset = cell
-        	let meal = food[id]
+        let preset = cell
+        let meal = food![id]
         	let id = meal.value(forKey: "id") as! Int32
         
-        	preset.img.image = UIImage(data: (meal?.value(forKey: "image") as! Data))
-        	preset.ingredients.text = meal?.value(forKey: "ingredients") as! String
-        	preset.name.text = meal?.value(forKey: "name") as! String
-        	preset.restorationIdentifier = String(id)
+        preset.img.image = UIImage(data: (meal.value(forKey: "image") as! Data))
+        preset.ingredients.text = meal.value(forKey: "ingredients") as! String
+        preset.name.text = meal.value(forKey: "name") as! String
+        preset.restorationIdentifier = String(id)
         
-        	return preset
-    	}
+        return preset
+    }
 
     /*func getCell(byIndex id: Int, cell: CustomCell) -> CustomCell {
         let preset = cell

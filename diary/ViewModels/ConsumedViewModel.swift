@@ -1,4 +1,4 @@
-﻿//
+//
 //  ConsumedViewModel.swift
 //  diary
 //
@@ -28,22 +28,27 @@ class ConsumedViewModel {
     }
 
 
-	func getCell(date: String, byIndex id: Int, cell: CustomCell, section: Int) -> {
+	func getCell(date: String, byIndex id: Int, cell: CustomCell, section: Int) -> CustomCell {
 		let preset = cell
-		var consumed = (section == 0) ? consumedMeal[id] : consumedDrink[id]
+        var consumed = (section == 0) ? consumedMeal![id] : consumedDrink![id]
 
 		let foodId = consumed.value(forKey: "id") as! Int32
 		let type = (section == 0) ? "Meals" : "Drinks"
 
-		let meal = db?.fetchFood(byId: foodId, type: type)
+        let meal = db?.fetchFood(byId: Int(foodId), type: type)
+        let id = consumed.value(forKey: "selfId") as! Int
 
 		preset.img.image = UIImage(data: (meal?.value(forKey: "image") as! Data))
-       		preset.ingredients.text = "\(consumed?.value(forKey: "quantity") as! String)g"
-        	preset.name.text = meal?.value(forKey: "name") as! String
-        	preset.restorationIdentifier = consumed.value(forKey: "id") as! String
+        preset.ingredients.text = "\(consumed.value(forKey: "quantity") as! String)g"
+        preset.name.text = meal?.value(forKey: "name") as! String
+        preset.restorationIdentifier = String(id)
 
 		return preset
 	}
+    
+    func existFood(atDate date: String) -> Bool {
+        return (db?.checkIfFoodLeft(atDate: date))!
+    }
     
 // CALL ONLY checkIfFoodLeft to remove a day
     

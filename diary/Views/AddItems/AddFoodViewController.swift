@@ -78,6 +78,7 @@ extension AddFoodViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        foodVM?.updateFood()
         tableView.tableFooterView = UIView()
     }
 }

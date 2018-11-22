@@ -171,6 +171,7 @@
 				57693AB021998C5D00B216B0 /* Images */,
 				57693A9E21998BA700B216B0 /* Main.storyboard */,
 				57693AA421998BA800B216B0 /* Assets.xcassets */,
+				57693AC32199A40C00B216B0 /* addImg.png */,
 				57693AA621998BA800B216B0 /* LaunchScreen.storyboard */,
 				57693AA921998BA800B216B0 /* Info.plist */,
 				57693ACF2199B6CD00B216B0 /* Food.plist */,
@@ -184,7 +185,6 @@
 			children = (
 				575992E621A2F77E008C50ED /* DrinksAndMeals */,
 				5760A3E42199D5EB00521582 /* TabBar */,
-				57693AC32199A40C00B216B0 /* addImg.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
