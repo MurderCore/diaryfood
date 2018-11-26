@@ -17,8 +17,8 @@ class HistoryViewModel {
     }
     
     func getCellDate(byIndex id: Int) -> String {
-        let date = db.fetchHistory(byIndex: id).value(forKey: "date") as! String
-        return date
+        let date = db.fetchHistory(byIndex: id).date
+        return date!
     }
     
     func deleteDay(byDate date: String){

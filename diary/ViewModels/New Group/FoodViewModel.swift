@@ -12,7 +12,7 @@ import CoreData
 
 class FoodViewModel {
     
-	var food: [NSManagedObject]?
+	var food: [FoodModel]?
 
     var db = FoodManager.instance
     var type: String?
@@ -24,12 +24,11 @@ class FoodViewModel {
 	func getCell(byIndex id: Int, cell: CustomCell) -> CustomCell {
         let preset = cell
         let meal = food![id]
-        let id = meal.value(forKey: "id") as! Int32
         
-        preset.img.image = UIImage(data: (meal.value(forKey: "image") as! Data))
-        preset.ingredients.text = meal.value(forKey: "ingredients") as? String
-        preset.name.text = meal.value(forKey: "name") as? String
-        preset.restorationIdentifier = String(id)
+        preset.img.image = UIImage(data: meal.image as! Data)
+        preset.ingredients.text = meal.ingredients
+        preset.name.text = meal.name
+        preset.restorationIdentifier = String(meal.id!)
         
         return preset
     }
