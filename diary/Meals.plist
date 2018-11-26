@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>Meal0</key>
+<array>
 	<dict>
 		<key>id</key>
 		<integer>2</integer>
@@ -13,7 +12,6 @@
 		<key>image</key>
 		<string>mamaliga.jpg</string>
 	</dict>
-	<key>Meal1</key>
 	<dict>
 		<key>id</key>
 		<integer>0</integer>
@@ -24,7 +22,6 @@
 		<key>image</key>
 		<string>turkey.jpeg</string>
 	</dict>
-	<key>Meal2</key>
 	<dict>
 		<key>id</key>
 		<integer>1</integer>
@@ -35,5 +32,5 @@
 		<key>image</key>
 		<string>sandwich.jpg</string>
 	</dict>
-</dict>
+</array>
 </plist>

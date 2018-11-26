@@ -305,33 +305,35 @@ class FoodManager {
     
     func populateDataBase(){
         
-        func addForDict(name: String, type: String, userDefaultKey: String) {
-            if let path = Bundle.main.path(forResource: name, ofType: "plist"),
-                let foodDict = NSDictionary(contentsOfFile: path)
-            {
-                let foodCount = foodDict.count
-                UserDefaults.standard.set(foodCount, forKey: userDefaultKey)
-                populateFood(type: type, myDict: foodDict, elements: foodCount)
-            }
-        }
-        func populateFood(type: String, myDict: NSDictionary, elements: Int) {
-            for i in 0..<elements
-            {
-                var imgData: NSData?
-                print(myDict["\(type)\(i)"])
-                let path = ((myDict["\(type)\(i)"] as! NSDictionary)["image"]) as! String
-                if let filePath = Bundle.main.path(forResource: path, ofType: ""), let image = UIImage(contentsOfFile: filePath) {
-                    imgData = image.pngData()! as NSData
+        func addForDict(name: String, userDefaultKey: String) {
+            
+            if let path = Bundle.main.path(forResource: name, ofType: "plist"){
+                if let arrayOfDictionaries = NSArray(contentsOfFile: path)
+                {
+                    let foodCount = arrayOfDictionaries.count
+                    UserDefaults.standard.set(foodCount, forKey: userDefaultKey)
+                    
+                    for dict in arrayOfDictionaries {
+                        populateFood(type: name, dict: dict as! NSDictionary)
+                    }
                 }
-                let ingredients = ((myDict["\(type)\(i)"] as! NSDictionary)["ingredients"])!
-                let name = ((myDict["\(type)\(i)"] as! NSDictionary)["name"])!
-                let id = ((myDict["\(type)\(i)"] as! NSDictionary)["id"])!
-                
-                addFood(id: id as! Int32, name: name as! String, ingredients: ingredients as! String, image: imgData!, type: "\(type)s")
             }
         }
-        addForDict(name: "Meals", type: "Meal", userDefaultKey: "plistMeals")
-        addForDict(name: "Drinks", type: "Drink", userDefaultKey: "plistDrinks")
+        func populateFood(type: String, dict: NSDictionary) {
+            var imgData: NSData?
+            let path = dict["image"] as! String
+            if let filePath = Bundle.main.path(forResource: path, ofType: ""), let image = UIImage(contentsOfFile: filePath) {
+                imgData = image.pngData()! as NSData
+            }
+            let ingredients = (dict["ingredients"])!
+            let name = (dict["name"])!
+            let id = (dict["id"])!
+            
+            addFood(id: id as! Int32, name: name as! String, ingredients: ingredients as! String, image: imgData!, type: type)
+        }
+        
+        addForDict(name: "Meals", userDefaultKey: "plistMeals")
+        addForDict(name: "Drinks", userDefaultKey: "plistDrinks")
     }
     
     private func fetchFoodManaged(byId id: Int, type: String) -> NSManagedObject? {
