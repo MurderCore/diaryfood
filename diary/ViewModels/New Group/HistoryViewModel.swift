@@ -10,22 +10,18 @@ import Foundation
 
 class HistoryViewModel {
     
-    var db: FoodManager?
-    
-    init(db: FoodManager) {
-        self.db = db
-    }
+    var db = FoodManager.instance
     
     func getNumberOfRows() -> Int {
-        return (db?.fetchHistoryCount())!
+        return db.fetchHistoryCount()
     }
     
     func getCellDate(byIndex id: Int) -> String {
-        let date = db?.fetchHistory(byIndex: id).value(forKey: "date") as! String
+        let date = db.fetchHistory(byIndex: id).value(forKey: "date") as! String
         return date
     }
     
     func deleteDay(byDate date: String){
-        db?.deleteHistory(date: date)
+        db.deleteHistory(date: date)
     }
 }

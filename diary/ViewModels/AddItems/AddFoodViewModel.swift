@@ -10,22 +10,18 @@ import UIKit
 
 class AddFoodViewModel {
     
-    var db: FoodManager?
+    var db = FoodManager.instance
     var type: String?
-    
-    init(db: FoodManager) {
-        self.db = db
-    }
     
     func addConsumedMeal(id: Int, quantity: Int){
         
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
         let time : String = formatter.string(from: Date())
-        if !(db?.existDay(date: time))! {
-            db?.addDate(date: time)
+        if !(db.existDay(date: time)) {
+            db.addDate(date: time)
         }
-        db?.addFoodToDate(date: time, foodType: type!, foodId: id, quantity: String(quantity))
+        db.addFoodToDate(date: time, foodType: type!, foodId: id, quantity: String(quantity))
     }
     
     func getAlert(message: String) -> UIAlertController {

@@ -33,6 +33,7 @@
 		57693AD52199BEB600B216B0 /* FoodManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57693AD42199BEB600B216B0 /* FoodManager.swift */; };
 		578C9B5821AC1C460054DA44 /* Meals.plist in Resources */ = {isa = PBXBuildFile; fileRef = 578C9B5721AC1C460054DA44 /* Meals.plist */; };
 		578C9B5A21AC1CCE0054DA44 /* Drinks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 578C9B5921AC1CCE0054DA44 /* Drinks.plist */; };
+		578C9B8021AC35460054DA44 /* CoreDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578C9B7F21AC35460054DA44 /* CoreDataModels.swift */; };
 		57D54AD621A43420000E3A24 /* FoodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D54AD521A4341F000E3A24 /* FoodsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,7 @@
 		57693AD42199BEB600B216B0 /* FoodManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodManager.swift; sourceTree = "<group>"; };
 		578C9B5721AC1C460054DA44 /* Meals.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Meals.plist; sourceTree = "<group>"; };
 		578C9B5921AC1CCE0054DA44 /* Drinks.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Drinks.plist; sourceTree = "<group>"; };
+		578C9B7F21AC35460054DA44 /* CoreDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModels.swift; sourceTree = "<group>"; };
 		57D54AD521A4341F000E3A24 /* FoodsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FoodsViewController.swift; path = /Users/victor/Desktop/diaryfood/diary/Views/BarMenu/FoodsViewController.swift; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -144,6 +146,7 @@
 			children = (
 				57693ACD2199B39F00B216B0 /* TabBarController.swift */,
 				57693A9A21998BA700B216B0 /* AppDelegate.swift */,
+				578C9B7E21AC35290054DA44 /* Models */,
 				57693ABC2199968300B216B0 /* ViewModels */,
 				57693AB121998C7100B216B0 /* Views */,
 				57693AB021998C5D00B216B0 /* Images */,
@@ -205,6 +208,14 @@
 				57693AB221998CA700B216B0 /* AddFoodViewController.swift */,
 			);
 			path = AddItems;
+			sourceTree = "<group>";
+		};
+		578C9B7E21AC35290054DA44 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				578C9B7F21AC35460054DA44 /* CoreDataModels.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,6 +312,7 @@
 				574F75B5219AFD26007F55BB /* CreateFoodViewModel.swift in Sources */,
 				57D54AD621A43420000E3A24 /* FoodsViewController.swift in Sources */,
 				57693AD52199BEB600B216B0 /* FoodManager.swift in Sources */,
+				578C9B8021AC35460054DA44 /* CoreDataModels.swift in Sources */,
 				5709A375219C6D610026B185 /* HistoryViewModel.swift in Sources */,
 				57693A9B21998BA700B216B0 /* AppDelegate.swift in Sources */,
 				5709A377219C6D610026B185 /* FoodViewModel.swift in Sources */,

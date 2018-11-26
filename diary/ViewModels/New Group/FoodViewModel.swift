@@ -14,15 +14,11 @@ class FoodViewModel {
     
 	var food: [NSManagedObject]?
 
-    var db: FoodManager?
+    var db = FoodManager.instance
     var type: String?
     
-    init(foodManager: FoodManager) {
-        self.db = foodManager
-    }
-    
     func getRowsCount() -> Int {
-        return Int((db?.fetchCount(type: type!))!)
+        return Int((db.fetchCount(type: type!)))
     }
     
 	func getCell(byIndex id: Int, cell: CustomCell) -> CustomCell {
@@ -39,10 +35,10 @@ class FoodViewModel {
     }
 
 	func updateFood(){
-		food = db?.fetchFood(type: type!)
+        food = db.fetchFood(type: type!)
 	}
     
     func remove(atId id: Int){
-        db?.removeFood(byId: id, type: type!)
+        db.removeFood(byId: id, type: type!)
     }
 }

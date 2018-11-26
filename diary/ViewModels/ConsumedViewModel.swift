@@ -11,14 +11,10 @@ import CoreData
 
 class ConsumedViewModel {
     
-    var db: FoodManager?
+    var db = FoodManager.instance
     
     var consumedMeal: [NSManagedObject]?
     var consumedDrink: [NSManagedObject]?
-    
-    init(db: FoodManager) {
-        self.db = db
-    }
     
     func getRowsNumb(forSection id: Int, date: String) -> Int {
         if id == 0 {
@@ -35,7 +31,7 @@ class ConsumedViewModel {
 		let foodId = consumed.value(forKey: "id") as! Int32
 		let type = (section == 0) ? "Meals" : "Drinks"
 
-        let meal = db?.fetchFood(byId: Int(foodId), type: type)
+        let meal = db.fetchFood(byId: Int(foodId), type: type)
         let id = consumed.value(forKey: "selfId") as! Int
 
 		preset.img.image = UIImage(data: (meal?.value(forKey: "image") as! Data))
@@ -47,19 +43,19 @@ class ConsumedViewModel {
 	}
     
     func existFood(atDate date: String) -> Bool {
-        return (db?.checkIfFoodLeft(atDate: date))!
+        return (db.checkIfFoodLeft(atDate: date))
     }
     
 // CALL ONLY checkIfFoodLeft to remove a day
     
     func deleteFoodFromDate(date: String, type: String, id: String){
-        db?.deleteFoodFromDate(date: date, type: type, foodId: Int(id)!)
+        db.deleteFoodFromDate(date: date, type: type, foodId: Int(id)!)
         updateFoods(date: date)
     }
     
     func updateFoods(date: String){
-        consumedMeal = db?.getConsumed(date: date, type: "meals")
-        consumedDrink = db?.getConsumed(date: date, type: "drinks")
+        consumedMeal = db.getConsumed(date: date, type: "meals")
+        consumedDrink = db.getConsumed(date: date, type: "drinks")
     }
 }
 

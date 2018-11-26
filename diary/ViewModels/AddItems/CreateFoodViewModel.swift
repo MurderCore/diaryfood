@@ -10,13 +10,9 @@ import UIKit
 
 class CreateFoodViewModel {
     
-    var db: FoodManager?
+    var db = FoodManager.instance
     var missing = ""
     var type: String?
-    
-    init(db: FoodManager) {
-        self.db = db
-    }
     
     
     func isFullDescribed(ingredients: UITextView, name: UITextField, imgPicked: Bool) -> Bool {
@@ -49,7 +45,7 @@ class CreateFoodViewModel {
         let imgData: NSData = img.image!.pngData()! as NSData
         var id = UserDefaults.standard.integer(forKey: key)
         
-        db?.addFood(id: Int32(id), name: name, ingredients: ingredients, image: imgData, type: type!)
+        db.addFood(id: Int32(id), name: name, ingredients: ingredients, image: imgData, type: type!)
         
         id += 1;
         UserDefaults.standard.set(id, forKey: key)

@@ -9,9 +9,7 @@
 import Foundation
 
 class ViewModels {
-    
-    var db = FoodManager()
-    
+
     var root = RootViewModel()
     var food: FoodViewModel?
     var createFood: CreateFoodViewModel?
@@ -20,11 +18,11 @@ class ViewModels {
     var consumed: ConsumedViewModel?
     
     init() {
-        food = FoodViewModel(foodManager: db)
-        createFood = CreateFoodViewModel(db: db)
-        history = HistoryViewModel(db: db)
-        addFood = AddFoodViewModel(db: db)
-        consumed = ConsumedViewModel(db: db)
+        food = FoodViewModel()
+        createFood = CreateFoodViewModel()
+        history = HistoryViewModel()
+        addFood = AddFoodViewModel()
+        consumed = ConsumedViewModel()
     }
 }
 

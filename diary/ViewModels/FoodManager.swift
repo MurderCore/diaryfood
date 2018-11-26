@@ -11,6 +11,8 @@ import CoreData
 
 class FoodManager {
     
+    static let instance = FoodManager()
+    
     var populated = false
     
     private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
