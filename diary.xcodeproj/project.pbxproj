@@ -79,7 +79,7 @@
 		578C9B5721AC1C460054DA44 /* Meals.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Meals.plist; sourceTree = "<group>"; };
 		578C9B5921AC1CCE0054DA44 /* Drinks.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Drinks.plist; sourceTree = "<group>"; };
 		578C9B7F21AC35460054DA44 /* CoreDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModels.swift; sourceTree = "<group>"; };
-		57D54AD521A4341F000E3A24 /* FoodsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FoodsViewController.swift; path = /Users/victor/Desktop/diaryfood/diary/Views/BarMenu/FoodsViewController.swift; sourceTree = "<absolute>"; };
+		57D54AD521A4341F000E3A24 /* FoodsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
