@@ -273,14 +273,23 @@ class FoodManager {
     
     func populateDataBase(){
         
+        func addForDict(name: String, type: String, userDefaultKey: String) {
+            if let path = Bundle.main.path(forResource: name, ofType: "plist"),
+                let foodDict = NSDictionary(contentsOfFile: path)
+            {
+                let foodCount = foodDict.count
+                UserDefaults.standard.set(foodCount, forKey: userDefaultKey)
+                populateFood(type: type, myDict: foodDict, elements: foodCount)
+            }
+        }
         func populateFood(type: String, myDict: NSDictionary, elements: Int) {
-            
-            for i in 1...elements
+            for i in 0..<elements
             {
                 var imgData: NSData?
+                print(myDict["\(type)\(i)"])
                 let path = ((myDict["\(type)\(i)"] as! NSDictionary)["image"]) as! String
                 if let filePath = Bundle.main.path(forResource: path, ofType: ""), let image = UIImage(contentsOfFile: filePath) {
-                    imgData = UIImagePNGRepresentation(image)! as NSData
+                    imgData = image.pngData()! as NSData
                 }
                 let ingredients = ((myDict["\(type)\(i)"] as! NSDictionary)["ingredients"])!
                 let name = ((myDict["\(type)\(i)"] as! NSDictionary)["name"])!
@@ -289,19 +298,8 @@ class FoodManager {
                 addFood(id: id as! Int32, name: name as! String, ingredients: ingredients as! String, image: imgData!, type: "\(type)s")
             }
         }
-        
-        if let path = Bundle.main.path(forResource: "Food", ofType: "plist"),
-            let myDict = NSDictionary(contentsOfFile: path)
-        {
-            let drinksCount = (myDict["DrinkCount"] as! Int)
-            let mealsCount = (myDict["MealCount"] as! Int)
-            
-            UserDefaults.standard.set(mealsCount, forKey: "plistMeals")
-            UserDefaults.standard.set(drinksCount, forKey: "plistDrinks")
-            
-            populateFood(type: "Meal", myDict: myDict, elements: mealsCount)
-            populateFood(type: "Drink", myDict: myDict, elements: drinksCount)
-        }
+        addForDict(name: "Meals", type: "Meal", userDefaultKey: "plistMeals")
+        addForDict(name: "Drinks", type: "Drink", userDefaultKey: "plistDrinks")
     }
 }
 

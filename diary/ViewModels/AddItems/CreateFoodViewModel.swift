@@ -37,8 +37,8 @@ class CreateFoodViewModel {
     
     
     func getMissingAlert() -> UIAlertController {
-        let alert = UIAlertController(title: "Incomplete description", message: "Missing \(missing)", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        let alert = UIAlertController(title: "Incomplete description", message: "Missing \(missing)", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         return alert
     }
     
@@ -46,7 +46,7 @@ class CreateFoodViewModel {
     func addMeal(ingredients: String, name: String, img: UIImageView){
         
         let key = (type! == "Drinks") ? "plistDrinks" : "plistMeals"
-        let imgData: NSData = UIImagePNGRepresentation(img.image!)! as NSData
+        let imgData: NSData = img.image!.pngData()! as NSData
         var id = UserDefaults.standard.integer(forKey: key)
         
         db?.addFood(id: Int32(id), name: name, ingredients: ingredients, image: imgData, type: type!)

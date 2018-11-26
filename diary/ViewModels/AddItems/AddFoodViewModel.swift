@@ -29,8 +29,8 @@ class AddFoodViewModel {
     }
     
     func getAlert(message: String) -> UIAlertController {
-        let alert = UIAlertController(title: message, message: nil, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        let alert = UIAlertController(title: message, message: nil, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         return alert
     }
     

@@ -58,8 +58,8 @@ extension AddFoodViewController {
             infoCell?.info.becomeFirstResponder()
             return
         }
-        tableView.cellForRow(at: IndexPath(row: lastSelected, section: 0))?.accessoryType = UITableViewCellAccessoryType.none
-        tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
+        tableView.cellForRow(at: IndexPath(row: lastSelected, section: 0))?.accessoryType = UITableViewCell.AccessoryType.none
+        tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
         lastSelected = indexPath.row
         lastSelectedID = Int((tableView.cellForRow(at: IndexPath(row: lastSelected, section: 0))?.restorationIdentifier)!)!
     }

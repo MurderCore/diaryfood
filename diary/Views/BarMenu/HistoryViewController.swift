@@ -38,7 +38,7 @@ extension HistoryViewController {
         tableView.tableFooterView = UIView()
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let date = tableView.cellForRow(at: indexPath)?.textLabel?.text!
             vm?.deleteDay(byDate: date!)

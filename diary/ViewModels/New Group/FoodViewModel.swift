@@ -28,7 +28,7 @@ class FoodViewModel {
 	func getCell(byIndex id: Int, cell: CustomCell) -> CustomCell {
         let preset = cell
         let meal = food![id]
-        	let id = meal.value(forKey: "id") as! Int32
+        let id = meal.value(forKey: "id") as! Int32
         
         preset.img.image = UIImage(data: (meal.value(forKey: "image") as! Data))
         preset.ingredients.text = meal.value(forKey: "ingredients") as? String
