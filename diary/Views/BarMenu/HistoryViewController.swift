@@ -21,6 +21,7 @@ class HistoryViewController: UITableViewController {
 
 // MARK: - Create table
 extension HistoryViewController {
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (vm?.getNumberOfRows())!
     }

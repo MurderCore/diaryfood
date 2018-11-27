@@ -19,11 +19,18 @@ class FoodManager {
     private var frc: NSFetchedResultsController<NSFetchRequestResult>!
     private var fetchRequest: NSFetchRequest<NSFetchRequestResult>?
     
+    
     init() {
         configFetchRequestController()
         PopulateIfFirstLaunch()
     }
     
+    
+    
+    
+    
+    
+    // FOOD METHODS
     
     func fetchFood(type: String) -> [FoodModel] {
         var fetched: [FoodModel] = []
@@ -46,12 +53,10 @@ class FoodManager {
         }
         return fetched
     }
-
     
     func fetchFood(byIndex id: Int, type: String) -> FoodModel {
         return fetchFood(type: type)[id]
     }
-
     func fetchFood(byId id: Int, type: String) -> FoodModel? {
         for food in fetchFood(type: type){
             if food.id! == id {
@@ -60,7 +65,6 @@ class FoodManager {
         }
         return nil
     }
-    
     
     func fetchCount(type: String) -> Int16 {
         return Int16(fetchFood(type: type).count)
@@ -86,8 +90,69 @@ class FoodManager {
         saveContext()
     }
     
+    func checkIfFoodLeft(atDate date: String) -> Bool {
+        let day = findDay(byDate: date)
+        if day.mutableSetValue(forKey: "drinks").allObjects.count == 0
+            && day.mutableSetValue(forKey: "meals").allObjects.count == 0 {
+            deleteHistory(date: date)
+            return false
+        }
+        return true
+    }
     
-    // MARK: -  HISTORY METHODS ######
+    func getFood(byDate date: String, type: String) -> [NSManagedObject] {
+        let day = findDay(byDate: date)
+        let foodIds = day.value(forKey: type) as! NSSet
+        
+        return foodIds.allObjects as! [NSManagedObject]
+    }
+    
+    func deleteFoodFromDate(date: String, type: String, foodId: Int){
+        let food = fetchConsumed(byId: foodId, type: type, date: date)
+        context?.delete(food!)
+        saveContext()
+    }
+    
+    func addFoodToDate(date: String, foodType: String, foodId: Int, quantity: String){
+        
+        let entityName = (foodType == "Meals") ? "MealConsumed" : "DrinkConsumed"
+        
+        let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Days")
+        fetchReq.predicate = NSPredicate(format: "date = %@", date)
+        
+        let foodEntity = NSEntityDescription.entity(forEntityName: entityName, in: context!)
+        let food = NSManagedObject(entity: foodEntity!, insertInto: context)
+        
+        food.setValue(FoodConsumedCount(type: entityName), forKey: "selfId")
+        food.setValue(foodId, forKey: "id")
+        food.setValue(quantity, forKey: "quantity")
+        
+        if let fetchResults = try? context?.fetch(fetchReq) as? [NSManagedObject] {
+            let day = fetchResults![0]
+            let key = (foodType == "Meals") ? "meals" : "drinks"
+            day.mutableSetValue(forKey: key).add(food)
+        }
+        saveContext()
+    }
+    
+    private func fetchFoodManaged(type: String) -> [NSManagedObject] {
+        var res: [NSManagedObject] = []
+        
+        let request = NSFetchRequest<NSManagedObject>(entityName: type)
+        do {
+            try res = (context?.fetch(request))!
+        } catch {
+            fatalError("Failed to load data from Database")
+        }
+        return res
+    }
+    
+    
+    
+    
+    
+    // HISTORY METHODS
+    
     func fetchHistory() -> [DayModel] {
         performFetchRequestController(predicate: nil)
         let days = frc.sections?[0].objects as! [NSManagedObject]
@@ -118,68 +183,12 @@ class FoodManager {
         return false
     }
     
-    
     func addDate(date: String){
         let entity = NSEntityDescription.entity(forEntityName: "Days", in: context!)
         let stored = NSManagedObject(entity: entity!, insertInto: context)
         
         stored.setValue(date, forKey: "date")
         saveContext()
-    }
-    
-    func FoodConsumedCount(type: String) -> Int {
-        let request = NSFetchRequest<NSManagedObject>(entityName: type)
-        return (contextFetch(request: request as! NSFetchRequest<NSFetchRequestResult>)?.count)!
-    }
-    
-    
-    func addFoodToDate(date: String, foodType: String, foodId: Int, quantity: String){
-        
-        let entityName = (foodType == "Meals") ? "MealConsumed" : "DrinkConsumed"
-        
-        let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "Days")
-        fetchReq.predicate = NSPredicate(format: "date = %@", date)
-        
-        let foodEntity = NSEntityDescription.entity(forEntityName: entityName, in: context!)
-        let food = NSManagedObject(entity: foodEntity!, insertInto: context)
-        
-        food.setValue(FoodConsumedCount(type: entityName), forKey: "selfId")
-        food.setValue(foodId, forKey: "id")
-        food.setValue(quantity, forKey: "quantity")
-        
-        if let fetchResults = try? context?.fetch(fetchReq) as? [NSManagedObject] {
-            let day = fetchResults![0]
-            let key = (foodType == "Meals") ? "meals" : "drinks"
-            day.mutableSetValue(forKey: key).add(food)
-        }
-        saveContext()
-    }
-    func deleteFoodFromDate(date: String, type: String, foodId: Int){
-        let food = fetchConsumed(byId: foodId, type: type, date: date)
-        context?.delete(food!)
-        saveContext()
-    }
-    
-    
-    func checkIfFoodLeft(atDate date: String) -> Bool {
-        let day = findDay(byDate: date)
-        if day.mutableSetValue(forKey: "drinks").allObjects.count == 0
-            && day.mutableSetValue(forKey: "meals").allObjects.count == 0 {
-            deleteHistory(date: date)
-            return false
-        }
-        return true
-    }
-    
-    func getFood(byDate date: String, type: String) -> [NSManagedObject] {
-        let day = findDay(byDate: date)
-        let foodIds = day.value(forKey: type) as! NSSet
-        
-        return foodIds.allObjects as! [NSManagedObject]
-    }
-    
-    func getFoodCountByDate(date: String, type: String) -> Int {
-        return getFood(byDate: date, type: type).count
     }
     
     func deleteHistory(date: String){
@@ -189,6 +198,21 @@ class FoodManager {
         let day = findDay(byDate: date)
         context?.delete(day)
         saveContext()
+    }
+    
+    
+    
+    
+    
+    // CONSUMED FOOD METHODS
+    
+    func FoodConsumedCount(type: String) -> Int {
+        let request = NSFetchRequest<NSManagedObject>(entityName: type)
+        return (contextFetch(request: request as! NSFetchRequest<NSFetchRequestResult>)?.count)!
+    }
+    
+    func getFoodCountByDate(date: String, type: String) -> Int {
+        return getFood(byDate: date, type: type).count
     }
     
     func fetchConsumed(byId id: Int, type: String, date: String) -> NSManagedObject? {
@@ -249,7 +273,9 @@ class FoodManager {
     }
     
     
-    // HELPERS @@@@
+    
+    
+    // HELPERS
     
     func configFetchRequestController() {
         fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Days")
@@ -259,15 +285,6 @@ class FoodManager {
         
         frc = NSFetchedResultsController(fetchRequest: fetchRequest!, managedObjectContext: context!,
                                          sectionNameKeyPath: nil, cacheName: nil)
-    }
-    
-    func PopulateIfFirstLaunch(){
-        populated = UserDefaults.standard.bool(forKey: "populated")
-        if !populated {
-            populateDataBase()
-            UserDefaults.standard.set(true, forKey: "populated")
-            UserDefaults.standard.synchronize()
-        }
     }
     
     func contextFetch(request: NSFetchRequest<NSFetchRequestResult>) -> [NSManagedObject]? {
@@ -301,6 +318,20 @@ class FoodManager {
         let predicate = NSPredicate(format: "date == %@", date)
         performFetchRequestController(predicate: predicate)
         return frc.sections?[0].objects![0] as! NSManagedObject
+    }
+    
+    
+    
+    
+    // POPULATE DB FROM PLIST
+    
+    func PopulateIfFirstLaunch(){
+        populated = UserDefaults.standard.bool(forKey: "populated")
+        if !populated {
+            populateDataBase()
+            UserDefaults.standard.set(true, forKey: "populated")
+            UserDefaults.standard.synchronize()
+        }
     }
     
     func populateDataBase(){
@@ -343,18 +374,6 @@ class FoodManager {
             }
         }
         return nil
-    }
-    
-    private func fetchFoodManaged(type: String) -> [NSManagedObject] {
-        var res: [NSManagedObject] = []
-        
-        let request = NSFetchRequest<NSManagedObject>(entityName: type)
-        do {
-            try res = (context?.fetch(request))!
-        } catch {
-            fatalError("Failed to load data from Database")
-        }
-        return res
     }
 }
 

@@ -11,18 +11,10 @@ import Foundation
 class ViewModels {
 
     var root = RootViewModel()
-    var food: FoodViewModel?
-    var createFood: CreateFoodViewModel?
-    var history: HistoryViewModel?
-    var addFood: AddFoodViewModel?
-    var consumed: ConsumedViewModel?
-    
-    init() {
-        food = FoodViewModel()
-        createFood = CreateFoodViewModel()
-        history = HistoryViewModel()
-        addFood = AddFoodViewModel()
-        consumed = ConsumedViewModel()
-    }
+    var food = FoodViewModel()
+    var createFood = CreateFoodViewModel()
+    var history = HistoryViewModel()
+    var addFood = AddFoodViewModel()
+    var consumed = ConsumedViewModel()
 }
 

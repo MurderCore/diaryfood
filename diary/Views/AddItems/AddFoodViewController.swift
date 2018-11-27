@@ -19,6 +19,7 @@ class AddFoodViewController: UITableViewController, UITextFieldDelegate {
     var lastSelectedID = 0
     
     var infoCell: InfoCell?
+    
     @IBOutlet weak var btnDone: UIBarButtonItem!
     @IBOutlet weak var navBar: UINavigationItem!
     
