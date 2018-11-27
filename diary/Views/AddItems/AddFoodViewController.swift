@@ -41,7 +41,8 @@ class AddFoodViewController: UITableViewController, UITextFieldDelegate {
     
     // MARK: - Button controller
     @IBAction func btnDoneClicked(_ sender: Any) {
-        vm?.addConsumedMeal(id: lastSelectedID, quantity: (infoCell?.info.text)!)
+        let q = Int((infoCell?.info.text)!)!
+        vm?.addConsumedMeal(id: lastSelectedID, quantity: String(q))
         navigationController?.popViewController(animated: true)
     }
     
@@ -83,6 +84,7 @@ extension AddFoodViewController {
         tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
         lastSelected = indexPath.row
         lastSelectedID = Int((tableView.cellForRow(at: IndexPath(row: lastSelected, section: 0))?.restorationIdentifier)!)!
+        validate()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
