@@ -51,7 +51,7 @@ class AddFoodViewController: UITableViewController, UITextFieldDelegate {
     // ReactX settings
     private func setupTextChangeHandling() {
         let validQuantity = infoCell?.info.rx.text
-            .throttle(0.1, scheduler: MainScheduler.instance).map { _ in self.validate() }
+            .throttle(0.1, scheduler: MainScheduler.instance).map { _ in }
         
         validQuantity!.subscribe({ _ in self.validate() }).disposed(by: disposer)
     }
