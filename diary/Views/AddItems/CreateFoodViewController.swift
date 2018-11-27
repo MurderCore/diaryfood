@@ -7,19 +7,22 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class CreateFoodViewController: UIViewController {
+
     
-    
+    @IBOutlet weak var btnAdd: UIBarButtonItem!
     @IBOutlet weak var navBar: UINavigationItem!
-    
     @IBOutlet weak var ingredients: UITextView!
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var name: UITextField!
     
+    var disposer = DisposeBag()
     
     var imgPicker = UIImagePickerController()
-    var imagePicked = false
+    var imagePicked = Variable(false)
     
     // vm - ViewModel
     var vm: CreateFoodViewModel?
@@ -27,6 +30,7 @@ class CreateFoodViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        btnAdd.isEnabled = false
         vm = (navigationController?.viewControllers[0] as! TabBarController).viewModels.createFood
         
         setVMType()
@@ -34,6 +38,7 @@ class CreateFoodViewController: UIViewController {
         configImgPicker()
         createImgTapRecognizer()
     }
+    
     
     func setVMType(){
         let type = (navBar.title == "Add Drink") ? "Drinks" : "Meals"
@@ -44,12 +49,35 @@ class CreateFoodViewController: UIViewController {
     // MARK: - Button controllers
     @IBAction func btnAddClicked(_ sender: Any) {
         img.image = vm?.resize(To: 120, image: img.image!)
-        if !(vm!.isFullDescribed(ingredients: ingredients, name: name, imgPicked: imagePicked)) {
+        if !(vm!.isFullDescribed(ingredients: ingredients, name: name, imgPicked: imagePicked.value)) {
             self.present((vm!.getMissingAlert()), animated: true, completion: nil)
             return
         }
         vm?.addMeal(ingredients: ingredients.text, name: name.text!, img: img)
         navigationController?.popViewController(animated: true)
+    }
+    
+
+    // RxSettings ####
+    private func setupCardImageDisplay() {
+        imagePicked.asObservable().subscribe({ _ in
+                self.validate()
+        }).disposed(by: disposer)
+    }
+    private func setupIngredientsValidating() {
+        let validDescription = ingredients.rx.text
+            .throttle(0.1, scheduler: MainScheduler.instance).map { _ in }
+        
+        validDescription.subscribe({ _ in self.validate() }).disposed(by: disposer)
+    }
+    private func setupNameValidating() {
+        let validDescription = name.rx.text
+            .throttle(0.1, scheduler: MainScheduler.instance).map { _ in }
+        
+        validDescription.subscribe({ _ in self.validate() }).disposed(by: disposer)
+    }
+    private func validate(){
+        btnAdd.isEnabled  = vm!.isFullDescribed(ingredients: ingredients, name: name, imgPicked: imagePicked.value)
     }
 }
 
@@ -79,6 +107,11 @@ extension CreateFoodViewController: UITextViewDelegate {
             textView.textColor = UIColor.lightGray
         }
     }
+    override func viewDidAppear(_ animated: Bool) {
+        setupIngredientsValidating()
+        setupNameValidating()
+        setupCardImageDisplay()
+    }
 }
 
 
@@ -104,15 +137,15 @@ extension CreateFoodViewController: UINavigationControllerDelegate, UIImagePicke
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-// Local variable inserted by Swift 4.2 migrator.
-let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+        // Local variable inserted by Swift 4.2 migrator.
+        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
         if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
             img.image = vm?.resize(To: 300, image: image)
             img.clipsToBounds = true
         }
         dismiss(animated: true, completion: {() in
-            self.imagePicked = true
+            self.imagePicked.value = true
             
         })
     }

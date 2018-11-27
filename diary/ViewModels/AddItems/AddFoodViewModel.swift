@@ -13,7 +13,7 @@ class AddFoodViewModel {
     var db = FoodManager.instance
     var type: String?
     
-    func addConsumedMeal(id: Int, quantity: Int){
+    func addConsumedMeal(id: Int, quantity: String){
         
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
@@ -21,7 +21,7 @@ class AddFoodViewModel {
         if !(db.existDay(date: time)) {
             db.addDate(date: time)
         }
-        db.addFoodToDate(date: time, foodType: type!, foodId: id, quantity: String(quantity))
+        db.addFoodToDate(date: time, foodType: type!, foodId: id, quantity: quantity)
     }
     
     func getAlert(message: String) -> UIAlertController {

@@ -7,22 +7,29 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-class AddFoodViewController: UITableViewController {
+class AddFoodViewController: UITableViewController, UITextFieldDelegate {
     
     var vm: AddFoodViewModel?
     var foodVM: FoodViewModel?
     
-    var lastSelected = 1
-    var lastSelectedID = 1
+    var lastSelected = 0
+    var lastSelectedID = 0
     
     var infoCell: InfoCell?
     @IBOutlet weak var btnDone: UIBarButtonItem!
     @IBOutlet weak var navBar: UINavigationItem!
     
+    let disposer = DisposeBag()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         btnDone.isEnabled = false
+
         foodVM = (navigationController?.viewControllers[0] as! TabBarController).viewModels.food
         vm = (navigationController?.viewControllers[0] as! TabBarController).viewModels.addFood
         
@@ -31,15 +38,30 @@ class AddFoodViewController: UITableViewController {
         vm?.type = type
     }
     
+    
     // MARK: - Button controller
     @IBAction func btnDoneClicked(_ sender: Any) {
+        vm?.addConsumedMeal(id: lastSelectedID, quantity: (infoCell?.info.text)!)
+        navigationController?.popViewController(animated: true)
+    }
     
-        let q = (infoCell?.info.text)!
-        if (vm?.isCorrectNumber(q: q))! {
-            vm?.addConsumedMeal(id: lastSelectedID, quantity: Int((infoCell?.info.text!)!)!)
-            navigationController?.popViewController(animated: true)
+    
+    // ReactX settings
+    private func setupTextChangeHandling() {
+        let validQuantity = infoCell?.info.rx.text
+            .throttle(0.1, scheduler: MainScheduler.instance).map { _ in self.validate() }
+        
+        validQuantity!.subscribe({ _ in self.validate() }).disposed(by: disposer)
+    }
+    private func validate(){
+        if (lastSelected < 1){
+            btnDone.isEnabled = false
+            return
+        }
+        if (vm?.isCorrectNumber(q: (infoCell?.info.text)!))! {
+            btnDone.isEnabled = true
         } else {
-            self.present((vm?.getAlert(message: "Incorrect quantity"))!, animated: true, completion: nil)
+            btnDone.isEnabled = false
         }
     }
 }
@@ -53,7 +75,6 @@ extension AddFoodViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        btnDone.isEnabled = true
         if indexPath.row == 0 {
             infoCell?.info.becomeFirstResponder()
             return
@@ -68,6 +89,7 @@ extension AddFoodViewController {
         if indexPath.row == 0 {
             let q = (tableView.dequeueReusableCell(withIdentifier: "quantity") as? InfoCell)
             infoCell = q
+            infoCell?.info.delegate = self
             return q!
         }
         var cell = (tableView.dequeueReusableCell(withIdentifier: "cell") as? CustomCell)
@@ -80,13 +102,17 @@ extension AddFoodViewController {
         foodVM?.updateFood()
         tableView.tableFooterView = UIView()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        setupTextChangeHandling()
+    }
 }
+
+
 
 class InfoCell: UITableViewCell {
     @IBOutlet weak var info: UITextField!
 }
-
-
 
 
 
